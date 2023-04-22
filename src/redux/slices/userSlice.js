@@ -9,9 +9,9 @@ var initialState = null;
 export const getUserData = async () => {
     const user = await Auth.currentAuthenticatedUser();
     console.log(user);
-    localStorage.removeItem('current_user');
-    localStorage.setItem('current_user', JSON.stringify(user))
-    initialState = JSON.parse(localStorage.getItem('current_user')).attributes
+    // localStorage.removeItem('current_user');
+    // localStorage.setItem('current_user', JSON.stringify(user))
+    // initialState = JSON.parse(localStorage.getItem('current_user')).attributes
     return user;
 }
 

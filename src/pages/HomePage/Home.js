@@ -16,7 +16,7 @@ export default function Home({signOut, user}) {
             <h1>Hello {currentUser && currentUser.nickname} - {currentUser && currentUser.email}</h1>
             <h1>Hello {user.attributes.nickname} - {user.attributes.email}</h1>
             <button onClick={signOut}>Sign out</button>
-            <Link to={'/home'}>enter</Link>
+            <Link to={'/home2'}>enter</Link>
         </main>
     )
 }

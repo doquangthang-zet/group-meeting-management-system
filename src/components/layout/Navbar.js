@@ -43,7 +43,6 @@ const Navbar = ({ menuBtnRef, isOpen, onClose }) => {
 					</DrawerContent>
 				</Drawer>
 			</Show>
-
 			<NavbarInner display={{base: "none", md: "flex"}} mr="0px" mt="0px"/>
 		</Box>
 	)

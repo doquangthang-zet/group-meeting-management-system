@@ -7,6 +7,7 @@ import {
 import {
     MdGroups,
 	MdOutlineSettings,
+    MdNotificationsNone,
 	MdLogout,
 } from "react-icons/md";
 import { GoListUnordered } from 'react-icons/go'
@@ -36,8 +37,8 @@ const NavbarInner = ({ display, mr, mt }) => {
 					textAlign="left"
 					borderRadius="10px"
 				>
-					
-					<TagLabel fontWeight="bold">Add</TagLabel>
+					<TagLeftIcon boxSize='20px' as={MdNotificationsNone} />
+					<TagLabel fontWeight="bold">Notifications</TagLabel>
 				</Tag>
 			</NavLink>
 			

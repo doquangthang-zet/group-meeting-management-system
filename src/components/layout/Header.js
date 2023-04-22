@@ -65,10 +65,11 @@ const Header = ({ menuBtnRef, onOpen }) => {
 				</HStack>
 				<Spacer />
 
-					<HStack gap='4'>
+					<HStack gap='2'>
 						<Avatar
 							display={{base: "none", md: "block"}}
 							name= 'Sang Nguyen'
+                            size='md'
 						/>
 						<VStack spacing="2px" align='stretch'
 							display={{base: "none", md: "block"}}

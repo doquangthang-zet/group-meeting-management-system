@@ -8,6 +8,7 @@ import {
 import Group from './components/Group'
 import User from './components/User'
 import Authentication from './pages/AuthenticationPage/Authentication';
+import Home2 from './pages/HomePage/Home2'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/group" element={<Group />}/>
         <Route path="/user" element={<User />}/>
         <Route path="/" element={<Authentication />}/>
+        <Route path="/home" element={<Home2 />}/>
       </Routes>
     </BrowserRouter>
   );

@@ -1,14 +1,23 @@
 import './App.css';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
-import AuthencationPage from './pages/AuthenticationPage/Authentication';
+import {
+	BrowserRouter,
+	Routes,
+	Route,
+	Navigate
+} from "react-router-dom";
+import Group from './components/Group'
+import User from './components/User'
+import Authentication from './pages/AuthenticationPage/Authentication';
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <Routes>
-        <Route path='/*' element={<AuthencationPage />} />
+        <Route path="/group" element={<Group />}/>
+        <Route path="/user" element={<User />}/>
+        <Route path="/" element={<Authentication />}/>
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 

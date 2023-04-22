@@ -2,16 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {store} from './redux/store'
+import { Amplify } from 'aws-amplify';
+
+Amplify.configure({
+    aws_project_region: 'ap-southeast-1', // (optional) Default region for project
+    aws_cognito_region: 'ap-southeast-1', // (required) - Region where Amazon Cognito project was created
+    aws_user_pools_id: 'ap-southeast-1_5YITie9NO', // (optional) -  Amazon Cognito User Pool ID
+    aws_user_pools_web_client_id: '4fss4ed3hsns8dnrkq9e0klvpb', // (optional) - Amazon Cognito App Client ID (App client secret needs to be disabled)
+    aws_mandatory_sign_in: 'enable' // (optional) - Users are not allowed to get the aws credentials unless they are signed in
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

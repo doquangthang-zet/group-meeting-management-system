@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { increase, decrease } from '../redux/slices/userSlice'
+import { setUser } from '../redux/slices/userSlice'
 
 
 const User = () => {
-    const count = useSelector((state) => state.user.value)
+    const count = useSelector((state) => {
+      
+      console.log(state)
+      return state.user;
+    })
     const dispatch = useDispatch()
 
     return (
         <div>
           <div>
-            <button
+            {/* <button
               aria-label="Increase"
               onClick={() => dispatch(increase())}
             >
@@ -22,7 +26,7 @@ const User = () => {
               onClick={() => dispatch(decrease())}
             >
               Decrease
-            </button>
+            </button> */}
           </div>
         </div>
       )

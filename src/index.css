@@ -13,6 +13,13 @@ code {
     monospace;
 }
 
+.authenticationPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .full-width {
 	width: 100% !important;
 	display: block;
@@ -45,3 +52,4 @@ code {
 .bold {
 	font-weight: bold;
 }
+

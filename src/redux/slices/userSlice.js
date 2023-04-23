@@ -1,27 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Auth } from "aws-amplify";
+import { useState } from "react";
 
 const initialState = {
-    id: "",
-    fullName: "",
-    email: "",
-    sid: "",
-    avaUrl: "",
-    value: 0,
-}
+    user:{
+        id: "",
+        name:"",
+    }
+}; 
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        increase: (state) => {
-            state.value += 1
-        },
-        decrease: (state) => {
-            state.value -= 1
-        },
+        setUser:(state,action)=> {
+            console.log("PAYLOAD",action.payload)
+            state.user = action.payload
+        }
     }
 })
 
-export const { increase, decrease } = userSlice.actions
+export const selectUser = (state) => state.user
+
+export const { setUser } = userSlice.actions
 
 export default userSlice.reducer

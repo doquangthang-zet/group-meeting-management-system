@@ -7,6 +7,7 @@ import '@aws-amplify/ui-react/styles.css';
 import { useNavigate, useLocation } from 'react-router';
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/slices/userSlice";
+import { I18n } from 'aws-amplify';
 
 export function Login() {
   const { tokens } = useTheme();
@@ -59,6 +60,13 @@ export function Login() {
       },
     },
   };
+  I18n.putVocabulariesForLanguage('en', {
+    'Create Account': 'Register', // Tab header
+    'Create a new account': 'New User', // Header text
+    'Confirm Password': 'Confirm your password', // Confirm Password label
+    Email: 'Enter your email',
+    'Phone Number': 'Enter your phone number',
+  });
   const { route, user } = useAuthenticator((context) => [context.route, context.user]);
   const dispatch = useDispatch();
   const location = useLocation();

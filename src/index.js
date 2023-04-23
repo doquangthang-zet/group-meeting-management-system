@@ -12,8 +12,10 @@ import { Authenticator } from '@aws-amplify/ui-react';
 Amplify.configure({
   aws_project_region: 'ap-southeast-1', // (optional) Default region for project
   aws_cognito_region: 'ap-southeast-1', // (required) - Region where Amazon Cognito project was created
-  aws_user_pools_id: 'ap-southeast-1_5YITie9NO', // (optional) -  Amazon Cognito User Pool ID
-  aws_user_pools_web_client_id: '4fss4ed3hsns8dnrkq9e0klvpb', // (optional) - Amazon Cognito App Client ID (App client secret needs to be disabled)
+  // aws_user_pools_id: 'ap-southeast-1_5YITie9NO', // (optional) -  Amazon Cognito User Pool ID
+  aws_user_pools_id: 'ap-southeast-1_bfNDSgmw1', // (optional) -  Amazon Cognito User Pool ID
+  // aws_user_pools_web_client_id: '4fss4ed3hsns8dnrkq9e0klvpb'
+  aws_user_pools_web_client_id: '4htdr709rrjruiagp1he10l571', // (optional) - Amazon Cognito App Client ID (App client secret needs to be disabled)
   aws_mandatory_sign_in: 'enable' // (optional) - Users are not allowed to get the aws credentials unless they are signed in
 });
 

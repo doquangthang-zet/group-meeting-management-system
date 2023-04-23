@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* App.css */
+
+
+.auth-wrapper {
+  display: flex;
+  justify-content: left;
+  margin: 2rem auto;
+  padding: 0 17rem;
+}

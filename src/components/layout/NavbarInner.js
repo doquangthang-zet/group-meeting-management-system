@@ -1,6 +1,6 @@
 import React from 'react'
 import Proptypes from 'prop-types'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import {
 	Tag, TagLeftIcon, TagLabel, VStack, Box,
 } from '@chakra-ui/react'
@@ -12,10 +12,21 @@ import {
 import { GoListUnordered } from 'react-icons/go'
 import { FaChalkboardTeacher } from "react-icons/fa";
 import {GrGroup} from "react-icons/gr"
+import { useAuthenticator } from '@aws-amplify/ui-react-core';
 
 
 
 const NavbarInner = ({ display, mr, mt }) => {
+	const { route, signOut } = useAuthenticator((context) => [
+		context.route,
+		context.signOut
+	]);
+
+	const navigate = useNavigate();
+	function logOut() {
+		signOut();
+		navigate('/login');
+	}
 	return (
 		<VStack spacing="20px" align='stretch' mr={mr} mt={mt} display={display}>
 			<NavLink to="/" className="full-width not-active">
@@ -41,7 +52,7 @@ const NavbarInner = ({ display, mr, mt }) => {
 				</Tag>
 			</NavLink>
 			
-			<Box className="full-width not-active my-nav-btn">
+			<Box className="full-width not-active my-nav-btn" onClick={logOut}>
 			{/* <Box className="full-width not-active my-nav-btn" onClick={signOut}> */}
 				<Tag bg="inherit" color="inherit"
 					w="100%"

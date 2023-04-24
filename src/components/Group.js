@@ -13,7 +13,6 @@ const Group = () => {
         <div>
           <div>
             <span>{user.email}</span>
-          
           </div>
         </div>
       )

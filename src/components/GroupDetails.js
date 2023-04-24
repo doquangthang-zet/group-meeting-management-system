@@ -11,19 +11,13 @@ const GroupDetails = () => {
                 m={{base:"12", md:"8"}}
                 align="stretch"
             >
-                <HStack
-                    align="center"
-                    pt='4'
+                <Heading
+                    color="#A27083"
+                    textAlign="center"
+                    fontSize='2xl'
                 >
-                    <Heading
-                        w="95%"
-                        color="#A27083"
-                        textAlign="center"
-                    >
-                        Group's Name
-                    </Heading>
-                    <Icon as={MdNotifications} w="5%" fontSize="4xl" color="#A27083" />
-                </HStack>
+                    Group's Name
+                </Heading>
 
                 <VStack
                     align="stretch"

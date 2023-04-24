@@ -4,11 +4,9 @@ import { decrement, increment } from '../redux/slices/groupSlice'
 import { selectUser } from "../redux/slices/userSlice";
 import {
 	Button,
-	Box, Text,
+	Box,
 	Heading,
-	Divider,
   VStack,
-  Spacer,
   InputGroup,
   InputLeftElement,
   Input,
@@ -19,13 +17,8 @@ import {
   Th,
   Td,
   Flex,
-  Container,
 } from '@chakra-ui/react'
-import { BellIcon, Search2Icon } from '@chakra-ui/icons'
-import { Link } from "react-router-dom";
-import { ButtonGroup } from "@aws-amplify/ui-react";
-import { Icon } from '@chakra-ui/react'
-import { HiOutlineUserGroup } from "react-icons/hi";
+import { HiOutlineUserGroup, HiOutlineSearch} from "react-icons/hi";
 import { MdGroupAdd} from "react-icons/md";
 import { useDisclosure } from "@chakra-ui/react";
 import CreateGroup from "./CreateGroup";
@@ -46,7 +39,7 @@ const Group = () => {
       <InputGroup mt="10px" mb="10px">
         <InputLeftElement
           pointerEvents='none'
-          children={<Search2Icon color='gray.300' />}
+          children={<HiOutlineSearch color='gray.300' />}
         />
         <Input placeholder='Search...' />
       </InputGroup>

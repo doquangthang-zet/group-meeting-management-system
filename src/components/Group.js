@@ -5,7 +5,7 @@ import { selectUser } from "../redux/slices/userSlice";
 import {
 	Button,
 	Box, Text,
-	HStack,
+	Heading,
 	Divider,
   VStack,
   Spacer,
@@ -34,11 +34,13 @@ const Group = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto"> 
-      <HStack justify="space-between" mb="10px">
-      <Text></Text>
-      <Text fontSize='4xl' color="#A27083" fontWeight="bold">Add Component</Text>
-      <Link><BellIcon w={9} h={9} color="#A27083" /></Link>
-    </HStack>
+        <Heading
+          color="#A27083"
+          textAlign="center"
+          fontSize='2xl'
+      >
+          Group
+      </Heading>
     {/* <Divider orientation='horizontal' /> */}
     <VStack>
       <InputGroup mt="10px" mb="10px">

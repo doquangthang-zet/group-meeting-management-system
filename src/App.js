@@ -13,6 +13,8 @@ import Navbar from './components/layout/Navbar';
 import Header from './components/layout/Header';
 import Group from "./components/Group"
 import User from "./components/User"
+import Join from "./components/Join"
+import Notifications from './components/Notifications';
 
 function MyRoutes() {
   const { route } = useAuthenticator((context) => [
@@ -48,6 +50,8 @@ function MyRoutes() {
                 <Route index element={<Group />} />
                 <Route path="/user" element={<User />} />
               </Route>
+              <Route path="/join" element={<Join />}/>
+              <Route path="/notifications" element={<Notifications />} />
             </Route>
           </Routes>
         </GridItem>

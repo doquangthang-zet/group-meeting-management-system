@@ -9,7 +9,7 @@ import {
 	Show,
 } from '@chakra-ui/react'
 import { MdMenu } from "react-icons/md";
-
+import {BellIcon} from "@chakra-ui/icons";
 import logo from "../../images/rmit_logo.svg"
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useSelector } from 'react-redux';
@@ -49,8 +49,10 @@ const Header = ({ menuBtnRef, onOpen }) => {
 
 				</HStack>
 				<Spacer />
-
-				{route == 'authenticated' ? 
+				<Link to="/notifications">
+					<BellIcon boxSize={6} mt='0.45em'/>
+				</Link>
+				{/* {route == 'authenticated' ? 
 				<HStack gap='2'>
 					<Avatar
 						display={{ base: "none", md: "block" }}
@@ -60,11 +62,13 @@ const Header = ({ menuBtnRef, onOpen }) => {
 					<VStack spacing="2px" align='stretch'
 						display={{ base: "none", md: "block" }}
 					>
-						{/* <Text fontSize="md" fontWeight="bold" textAlign="center">{user.email.slice(0,8)}</Text> */}
 						<Text fontSize="sm" textAlign="left">{user.email}</Text>
 					</VStack>
 				</HStack>
-				:<HStack></HStack>}
+				:<HStack></HStack>} */}
+				
+				{/* <Text fontSize="md" fontWeight="bold" textAlign="center">{user.email.slice(0,8)}</Text> */}
+
 			</Flex>
 		</Box>
 	)

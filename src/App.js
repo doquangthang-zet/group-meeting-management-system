@@ -13,6 +13,7 @@ import Navbar from './components/layout/Navbar';
 import Header from './components/layout/Header';
 import Group from "./components/Group"
 import User from "./components/User"
+import GroupDetails from './components/GroupDetails';
 
 function MyRoutes() {
   const { route } = useAuthenticator((context) => [
@@ -45,8 +46,9 @@ function MyRoutes() {
             <Route path='/login' element={<Login />}/>
             <Route element={<RequireAuth route={route} />}>
               <Route path="/">
-                <Route index element={<Group />} />
+                {/* <Route index element={<Group />} /> */}
                 <Route path="/user" element={<User />} />
+                <Route index element={<GroupDetails />} />
               </Route>
             </Route>
           </Routes>

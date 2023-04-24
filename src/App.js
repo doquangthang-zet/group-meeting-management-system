@@ -48,7 +48,7 @@ function MyRoutes() {
               <Route path="/">
                 {/* <Route index element={<Group />} /> */}
                 <Route path="/user" element={<User />} />
-                <Route index element={<GroupDetails />} />
+                <Route index element={<Group />} />
               </Route>
             </Route>
           </Routes>

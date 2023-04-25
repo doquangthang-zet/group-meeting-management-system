@@ -51,9 +51,10 @@ function MyRoutes() {
                 {/* <Route index element={<Group />} /> */}
                 <Route path="/user" element={<User />} />
                 <Route index element={<Group />} />
+                <Route path="/join" element={<Join />}/>
+                <Route path="/notifications" element={<Notifications />} />
               </Route>
-              <Route path="/join" element={<Join />}/>
-              <Route path="/notifications" element={<Notifications />} />
+              
             </Route>
           </Routes>
         </GridItem>

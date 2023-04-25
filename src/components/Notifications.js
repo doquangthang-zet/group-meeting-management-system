@@ -1,6 +1,8 @@
 import React from 'react';
 import {Card, CardBody, Text, CardHeader, Heading, IconButton} from "@chakra-ui/react"
 import {CheckIcon, CloseIcon} from "@chakra-ui/icons"
+import {BsCheck2} from "react-icons/bs";
+import {IoMdClose} from "react-icons/io";
 
 const Notifications = () => {
     return (
@@ -11,8 +13,8 @@ const Notifications = () => {
                 </CardHeader>
                 <CardBody mt="-1em">
                     <Text ml="0.5em">@hannguyen wanted to join your group!
-                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<CloseIcon boxSize={4} color="#E48181" />} />
-                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<CheckIcon  float="right" boxSize={4}  color="#306643"/>} />
+                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose  size="2em" color="#E48181" />} />
+                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right"  size="2em" color="#306643"/>} />
                     </Text>
                 </CardBody>
             </Card>
@@ -22,8 +24,8 @@ const Notifications = () => {
                 </CardHeader>
                 <CardBody mt="-1em">
                     <Text ml="0.5em">@hula wanted to join your group!
-                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<CloseIcon boxSize={4} color="#E48181" />} />
-                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<CheckIcon  float="right" boxSize={4}  color="#306643"/>} />
+                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose size="2em" color="#E48181" />} />
+                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right"  size="2em" color="#306643"/>} />
                     </Text>
                 </CardBody>
             </Card>
@@ -33,8 +35,8 @@ const Notifications = () => {
                 </CardHeader>
                 <CardBody mt="-1em">
                     <Text ml="0.5em">@misan wanted to join your group!
-                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<CloseIcon boxSize={4} color="#E48181" />} />
-                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<CheckIcon  float="right" boxSize={4}  color="#306643"/>} />
+                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose size="2em" color="#E48181" />} />
+                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right"  size="2em" color="#306643"/>} />
                     </Text>
                 </CardBody>
             </Card>

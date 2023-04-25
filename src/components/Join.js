@@ -102,7 +102,7 @@ const Join = () => {
           />
           <Input placeholder='Search...' />
         </InputGroup>
-        <Table variant='simple' size="lg" borderRadius='20'>
+        <Table variant='simple' size="lg">
           <Thead bg="#A27083">
             <Tr >
               <Th color='white' textAlign="center">Name</Th>

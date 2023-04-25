@@ -28,7 +28,7 @@ const GroupDetails = () => {
                         p={{base:"2", md:"3"}}
                         bg="white"
                         borderRadius="xl"
-                        border='1px' 
+                        border='1px'
                         borderColor='#A27083'
                     >
                         <Text>
@@ -39,7 +39,7 @@ const GroupDetails = () => {
                         p={{base:"2", md:"3"}}
                         bg="white"
                         borderRadius="xl"
-                        border='1px' 
+                        border='1px'
                         borderColor='#A27083'
                     >
                         <Text>
@@ -50,7 +50,7 @@ const GroupDetails = () => {
                         p={{base:"2", md:"3"}}
                         bg="white"
                         borderRadius="xl"
-                        border='1px' 
+                        border='1px'
                         borderColor='#A27083'
                     >
                         <Text>

@@ -17,6 +17,7 @@ import {
   Box,
   VStack,
   Heading,
+  Flex,
 } from '@chakra-ui/react';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { MdGroupAdd } from "react-icons/md";
@@ -94,7 +95,7 @@ const Join = () => {
         Join Group
       </Heading>
       {/* <Divider orientation='horizontal' /> */}
-      <VStack >
+      <VStack w='100%'>
         <InputGroup mt="10px" mb="10px">
           <InputLeftElement
             pointerEvents='none'
@@ -132,13 +133,13 @@ const Join = () => {
             </Tr>
           </Tbody>
         </Table>
-      </VStack>
-      <Box>
-          <Button leftIcon={<MdGroupAdd color='#E48181' />} float='right' onClick={onOpen} color='#E48181' boxShadow="2xl" mt='1em' background='white' borderRadius='10px' size='md'>
+        <Flex w='100%'>
+          <Button leftIcon={<MdGroupAdd color='#E48181' />} mt='1' float='right' onClick={onOpen} color='#E48181' FlexShadow="2xl" background='white' borderRadius='10' size='md' alignItems='center'>
             Create Group
           </Button>
           <CreateGroup isOpen={isOpen} onClose={onClose} />
-        </Box>
+        </Flex>
+      </VStack>
     </Box >
   )
 }

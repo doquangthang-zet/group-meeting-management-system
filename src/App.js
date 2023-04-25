@@ -15,6 +15,7 @@ import Group from "./components/Group"
 import User from "./components/User"
 import Join from "./components/Join"
 import Notifications from './components/Notifications';
+import GroupDetails from './components/GroupDetails';
 
 function MyRoutes() {
   const { route } = useAuthenticator((context) => [
@@ -47,8 +48,9 @@ function MyRoutes() {
             <Route path='/login' element={<Login />}/>
             <Route element={<RequireAuth route={route} />}>
               <Route path="/">
-                <Route index element={<Group />} />
+                {/* <Route index element={<Group />} /> */}
                 <Route path="/user" element={<User />} />
+                <Route index element={<Group />} />
               </Route>
               <Route path="/join" element={<Join />}/>
               <Route path="/notifications" element={<Notifications />} />

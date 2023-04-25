@@ -22,9 +22,14 @@ import { HiOutlineUserGroup, HiOutlineSearch} from "react-icons/hi";
 import { MdGroupAdd} from "react-icons/md";
 import { useDisclosure } from "@chakra-ui/react";
 import CreateGroup from "./CreateGroup";
+import { useNavigate } from "react-router-dom";
 
 const Group = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate();
+  const navigateToJoin = () => {
+    navigate('/join')
+  }
   return (
     <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto"> 
         <Heading
@@ -91,9 +96,10 @@ const Group = () => {
           </Tbody>
         </Table>
       <Flex w="100%" justify="space-between">
-          <Button leftIcon={<HiOutlineUserGroup />} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
+          <Button leftIcon={<HiOutlineUserGroup />} onClick={navigateToJoin} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
             Join Group
           </Button>
+          
           <Box>
             <Button onClick={onOpen} leftIcon={<MdGroupAdd />} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
               Create Group

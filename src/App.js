@@ -13,6 +13,8 @@ import Navbar from './components/layout/Navbar';
 import Header from './components/layout/Header';
 import Group from "./components/Group"
 import User from "./components/User"
+import Join from "./components/Join"
+import Notifications from './components/Notifications';
 import GroupDetails from './components/GroupDetails';
 
 function MyRoutes() {
@@ -49,6 +51,8 @@ function MyRoutes() {
                 {/* <Route index element={<Group />} /> */}
                 <Route path="/user" element={<User />} />
                 <Route index element={<Group />} />
+                <Route path="/join" element={<Join />}/>
+                <Route path="/notifications" element={<Notifications />} />
               </Route>
             </Route>
           </Routes>

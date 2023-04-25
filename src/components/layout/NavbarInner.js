@@ -14,6 +14,7 @@ import { GoListUnordered } from 'react-icons/go'
 import { FaChalkboardTeacher } from "react-icons/fa";
 import {GrGroup} from "react-icons/gr"
 import { useAuthenticator } from '@aws-amplify/ui-react-core';
+import Notifications from '../Notifications';
 
 
 
@@ -41,7 +42,7 @@ const NavbarInner = ({ display, mr, mt }) => {
 					<TagLabel fontWeight="bold">Group</TagLabel>
 				</Tag>
 			</NavLink>
-			<NavLink to="/group" className="full-width not-active">
+			<NavLink to="/notifications" className="full-width not-active">
 				<Tag bg="inherit" color="inherit"
 					p="15px"
 					w="100%"

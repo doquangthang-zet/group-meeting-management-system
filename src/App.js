@@ -54,7 +54,6 @@ function MyRoutes() {
                 <Route path="/join" element={<Join />}/>
                 <Route path="/notifications" element={<Notifications />} />
               </Route>
-              
             </Route>
           </Routes>
         </GridItem>

@@ -13,7 +13,8 @@ import {Input,
         Td,
         TableContainer,
         Button,
-        Box} from '@chakra-ui/react';
+        Box,
+        VStack} from '@chakra-ui/react';
 import {HiOutlineSearch} from 'react-icons/hi';
 import { MdGroupAdd} from "react-icons/md";
 import CreateGroup from "./CreateGroup";
@@ -26,16 +27,15 @@ const Join = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
-        <div>
-          <div>
-            <InputGroup m='2em'>
-              <InputLeftElement pointerEvents='none' children={<HiOutlineSearch color='gray.300'/>} />
-              <Input variant='outline' placeholder="Search" width='100em'/>
+        <Box w='93%' mt='1em' alignItems='left' ml="auto" mr="auto" >
+          <VStack>
+            <InputGroup m='1em'>
+                <InputLeftElement pointerEvents='none' children={<HiOutlineSearch color='gray.300'/>} />
+                <Input variant='outline' placeholder="Search" width='100em'/>
             </InputGroup>
-          </div>
-          <TableContainer m='2em' borderRadius='20px'>
+            <TableContainer borderRadius='20px' size="lg" w="100%">
             <Table variant='simple'>
-              <Thead bg='#A27083' >
+              <Thead bg='#A27083'>
                 <Tr >
                   <Th color='white' textAlign="center">Name</Th>
                   <Th color='white' textAlign="center">Members</Th>
@@ -73,11 +73,13 @@ const Join = () => {
               </Tbody>
             </Table>
           </TableContainer>
+       
           <Button leftIcon={<MdGroupAdd color='#E48181'/>} onClick={onOpen} color='#E48181' boxShadow="2xl" float='right' mr='2em' background='white' borderRadius='15' size='md'>
             Create Group
           </Button>
           <CreateGroup isOpen={isOpen} onClose={onClose} />
-        </div>
+          </VStack>
+        </Box>
       )
 }
 

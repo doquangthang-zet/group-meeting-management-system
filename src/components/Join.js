@@ -12,15 +12,18 @@ import {Input,
         Th,
         Td,
         TableContainer,
-        Button} from '@chakra-ui/react';
+        Button,
+        Box} from '@chakra-ui/react';
 import {HiOutlineSearch} from 'react-icons/hi';
 import { MdGroupAdd} from "react-icons/md";
+import CreateGroup from "./CreateGroup";
+import { useDisclosure } from "@chakra-ui/react";
 
 
 const Join = () => {
     const count = useSelector((state) => state.group.value)
     const {user} = useSelector(selectUser)
-
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
         <div>
@@ -70,9 +73,10 @@ const Join = () => {
               </Tbody>
             </Table>
           </TableContainer>
-          <Button leftIcon={<MdGroupAdd color='#E48181'/>} color='#E48181' boxShadow="2xl" float='right' mr='2em' background='white' borderRadius='15' size='md'>
+          <Button leftIcon={<MdGroupAdd color='#E48181'/>} onClick={onOpen} color='#E48181' boxShadow="2xl" float='right' mr='2em' background='white' borderRadius='15' size='md'>
             Create Group
           </Button>
+          <CreateGroup isOpen={isOpen} onClose={onClose} />
         </div>
       )
 }

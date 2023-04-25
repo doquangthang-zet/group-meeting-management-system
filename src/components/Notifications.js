@@ -1,6 +1,5 @@
 import React from 'react';
 import {Card, CardBody, Text, CardHeader, Heading, IconButton} from "@chakra-ui/react"
-import {CheckIcon, CloseIcon} from "@chakra-ui/icons"
 import {BsCheck2} from "react-icons/bs";
 import {IoMdClose} from "react-icons/io";
 

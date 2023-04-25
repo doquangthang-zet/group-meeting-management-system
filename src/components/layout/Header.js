@@ -9,7 +9,7 @@ import {
 	Show,
 } from '@chakra-ui/react'
 import { MdMenu } from "react-icons/md";
-import {BellIcon} from "@chakra-ui/icons";
+import {FaBell} from "react-icons/fa";
 import logo from "../../images/rmit_logo.svg"
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useSelector } from 'react-redux';
@@ -50,7 +50,7 @@ const Header = ({ menuBtnRef, onOpen }) => {
 				</HStack>
 				<Spacer />
 				<Link to="/notifications">
-					<BellIcon boxSize={6} mt='0.45em'/>
+					<FaBell size={"1.5em"} style={{marginTop: '0.45em'}} />
 				</Link>
 				{/* {route == 'authenticated' ? 
 				<HStack gap='2'>

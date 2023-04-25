@@ -13,7 +13,8 @@ import {Input,
         Td,
         TableContainer,
         Button} from '@chakra-ui/react';
-import {SearchIcon, AddIcon} from '@chakra-ui/icons';
+import {HiOutlineSearch} from 'react-icons/hi';
+import { MdGroupAdd} from "react-icons/md";
 
 
 const Join = () => {
@@ -25,7 +26,7 @@ const Join = () => {
         <div>
           <div>
             <InputGroup m='2em'>
-              <InputLeftElement pointerEvents='none' children={<SearchIcon color='gray.300'/>} />
+              <InputLeftElement pointerEvents='none' children={<HiOutlineSearch color='gray.300'/>} />
               <Input variant='outline' placeholder="Search" width='100em'/>
             </InputGroup>
           </div>
@@ -41,35 +42,35 @@ const Join = () => {
                   <Th color='white' textAlign="center">Action</Th>
                 </Tr>
               </Thead>
-              <Tbody background='white'>
+              <Tbody background='white' >
                 <Tr>
-                  <Td>BI</Td>
-                  <Td>3</Td>
-                  <Td>23/4/2023</Td>
-                  <Td>3:00 PM</Td>
-                  <Td>The Coffee House Tran Hung Dao</Td>
-                  <Td color='green'>Join</Td>
+                  <Td textAlign="center">BI</Td>
+                  <Td textAlign="center">3</Td>
+                  <Td textAlign="center">23/4/2023</Td>
+                  <Td textAlign="center">3:00 PM</Td>
+                  <Td textAlign="center">The Coffee House Tran Hung Dao</Td>
+                  <Td textAlign="center"><Button variant='ghost' colorScheme="green"> Join </Button></Td>
                 </Tr>
                 <Tr>
-                  <Td>BI</Td>
-                  <Td>3</Td>
-                  <Td>23/4/2023</Td>
-                  <Td>3:00 PM</Td>
-                  <Td>The Coffee House Tran Hung Dao</Td>
-                  <Td color='green'>Join</Td>
+                  <Td textAlign="center">BI</Td>
+                  <Td textAlign="center">3</Td>
+                  <Td textAlign="center">23/4/2023</Td>
+                  <Td textAlign="center">3:00 PM</Td>
+                  <Td textAlign="center">The Coffee House Tran Hung Dao</Td>
+                  <Td textAlign="center"><Button variant='ghost' colorScheme="green">Join</Button></Td>
                 </Tr>
                 <Tr>
-                  <Td>BI</Td>
-                  <Td>3</Td>
-                  <Td>23/4/2023</Td>
-                  <Td>3:00 PM</Td>
-                  <Td>The Coffee House Tran Hung Dao</Td>
-                  <Td color='green'>Join</Td>
+                  <Td textAlign="center">BI</Td>
+                  <Td textAlign="center">3</Td>
+                  <Td textAlign="center">23/4/2023</Td>
+                  <Td textAlign="center">3:00 PM</Td>
+                  <Td textAlign="center">The Coffee House Tran Hung Dao</Td>
+                  <Td textAlign="center"><Button variant='ghost' colorScheme="green">Join</Button></Td>
                 </Tr>
               </Tbody>
             </Table>
           </TableContainer>
-          <Button leftIcon={<AddIcon color='#E48181'/>} color='#E48181' float='right' mr='2em' background='white' borderRadius='15' size='md'>
+          <Button leftIcon={<MdGroupAdd color='#E48181'/>} color='#E48181' boxShadow="2xl" float='right' mr='2em' background='white' borderRadius='15' size='md'>
             Create Group
           </Button>
         </div>

@@ -1,11 +1,18 @@
 
-const groupAPI = 'https://sm6y72lnrl.execute-api.ap-southeast-1.amazonaws.com/new_dev/groups'
-const groupAPISpec = 'https://sm6y72lnrl.execute-api.ap-southeast-1.amazonaws.com/new_dev/groups/'
-const groupNUserAPI = ' https://1f4rcj5abe.execute-api.ap-southeast-1.amazonaws.com/dev/groupnuser'
+export const groupAPI = 'https://sm6y72lnrl.execute-api.ap-southeast-1.amazonaws.com/new_dev/groups'
+export const groupAPISpec = 'https://sm6y72lnrl.execute-api.ap-southeast-1.amazonaws.com/new_dev/groups/'
+export const groupNUserAPI = ' https://1f4rcj5abe.execute-api.ap-southeast-1.amazonaws.com/dev/groupnuser'
 const groupNUserAPISpec = ' https://1f4rcj5abe.execute-api.ap-southeast-1.amazonaws.com/dev/groupnuser/'
+const notifAPI = 'https://p5acd4z3y4.execute-api.ap-southeast-1.amazonaws.com/dev/request'
+const notifSpecAPI = 'https://p5acd4z3y4.execute-api.ap-southeast-1.amazonaws.com/dev/request/'
 //--------------CRUD Group------------------//
 //Mốt chỉnh lại cái lambda function đẻ thêm date với giờ vào nữa 
-const createGroup = async (data) => {
+// const fetchGroupData = () => {
+//     fetch(groupAPI)
+//     .then((res) => {return(res.json())})
+// }
+
+const createGroup = (data) => {
     fetch(groupAPI, {
             method: 'PUT',
             headers: {
@@ -74,7 +81,40 @@ const deleteGroupNUser = (id) => {
     })
 }
 
+//-------------Notifications-----------------
+const createRequest = (data) => {
+    fetch(notifAPI, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    })
+}
 
+const deleteRequest = (data, id) => {
+    fetch(notifSpecAPI + id, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    }).then((res) => {
+        window.location.reload()
+    })
+}
+
+const updateRequest = (data, id) => {
+    fetch(notifSpecAPI + id, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    })
+}
 export {
     createGroup,
     updateGroup,
@@ -82,4 +122,7 @@ export {
     getGroupbyId,
     createGroupNUser,
     deleteGroupNUser,
+    createRequest,
+    deleteRequest,
+    updateRequest,
 }

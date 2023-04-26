@@ -74,7 +74,7 @@ export function Login() {
         label: 'Email:',
         placeholder: 'Enter your Email:',
         order: 1,
-      }
+      },
     },
     signIn: {
       username: {
@@ -98,7 +98,7 @@ export function Login() {
   return (
     <View className="auth-wrapper">
        <ThemeProvider theme={theme}>
-        <Authenticator formFields={formFields}></Authenticator>
+        <Authenticator formFields={formFields} signUpAttributes={['name']}></Authenticator>
        </ThemeProvider>
     </View>
   );

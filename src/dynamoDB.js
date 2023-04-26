@@ -74,6 +74,15 @@ const deleteGroupNUser = (id) => {
     })
 }
 
+//Get all groupNUser
+const getAllGroupNUser = () => {
+    return fetch(groupNUserAPI).then((res) => {
+        return res.json();
+    }).then((resp) => {
+        return resp
+    })
+}
+
 
 export {
     createGroup,
@@ -82,4 +91,5 @@ export {
     getGroupbyId,
     createGroupNUser,
     deleteGroupNUser,
+    getAllGroupNUser,
 }

@@ -53,6 +53,7 @@ function MyRoutes() {
                 <Route index element={<Group />} />
                 <Route path="/join" element={<Join />}/>
                 <Route path="/notifications" element={<Notifications />} />
+                <Route path="/groupdetails/:groupid" element={<GroupDetails />}/>
               </Route>
             </Route>
           </Routes>

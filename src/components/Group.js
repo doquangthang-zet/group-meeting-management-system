@@ -30,6 +30,9 @@ const Group = () => {
   const navigateToJoin = () => {
     navigate('/join')
   }
+  const navigateToGroupDetails = () => {
+    navigate('/groupDetails/GSXTWDPcgBRMEhfVJATg9')
+  }
   return (
     <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto"> 
         <Heading
@@ -60,7 +63,7 @@ const Group = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
+            <Tr onClick={() => navigateToGroupDetails()}>
               <Td>Cloud Computing</Td>
               <Td>3</Td>
               <Td >25/4/2023</Td>

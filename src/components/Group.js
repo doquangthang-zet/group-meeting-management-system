@@ -17,6 +17,8 @@ import {
   Th,
   Td,
   Flex,
+  Stack,
+  Skeleton,
 } from '@chakra-ui/react'
 import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
@@ -35,6 +37,7 @@ const Group = () => {
     navigate('/join')
   }
   const [grpData, setGrpData] = useState([])
+  const [loading, setLoading] = useState(true)
   console.log(grpData)
 
   const fetchGroupData = async () => {
@@ -50,6 +53,7 @@ const Group = () => {
     } catch (e) {
       console.log(e)
     }
+    setLoading(false)
   }
   useEffect(() => {
     fetchGroupData()
@@ -84,9 +88,19 @@ const Group = () => {
             </Tr>
           </Thead>
           <Tbody>
-              {
-                grpData.map((group) =>(
-                  <Tr key= {group.id}>
+            {loading ?
+              <Tr>
+                <Td colSpan={10}>
+                  <Stack w='100'>
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                  </Stack>
+                </Td>
+              </Tr>
+              : grpData.map((group) => (
+                <Tr key={group.id}>
                   <Td>{group.groupname}</Td>
                   <Td>{group.date}</Td>
                   <Td>{group.time}</Td>
@@ -96,8 +110,8 @@ const Group = () => {
                     Leave
                   </Button></Td>
                 </Tr>
-                ))
-              }
+              ))
+            }
           </Tbody>
         </Table>
         <Flex w="100%" justify="space-between">

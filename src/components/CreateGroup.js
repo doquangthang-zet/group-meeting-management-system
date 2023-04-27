@@ -9,7 +9,9 @@ import {
 	HStack,
 } from '@chakra-ui/react'
 
+
 const CreateGroup = ({isOpen, onClose}) => {
+  
     return(
     <Modal isOpen={isOpen} onClose={onClose}
     size="xl"

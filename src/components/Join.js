@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../redux/slices/groupSlice'
+import { createGroupRequestAsync, decrement, increment, selectGroup } from '../redux/slices/groupSlice'
 import { selectUser } from "../redux/slices/userSlice";
 import {
   Input,
@@ -18,12 +18,14 @@ import {
   VStack,
   Heading,
   Flex,
+  Icon,
+  IconButton,
 } from '@chakra-ui/react';
 import { HiOutlineSearch } from 'react-icons/hi';
-import { MdGroupAdd } from "react-icons/md";
+import { MdGroupAdd, MdCheckCircle, MdAdd } from "react-icons/md";
 import CreateGroup from "./CreateGroup";
 import { useDisclosure } from "@chakra-ui/react";
-import { groupAPI, groupNUserAPI } from "../dynamoDB";
+import { createRequest, groupAPI, groupNUserAPI } from "../dynamoDB";
 
 
 const Join = () => {
@@ -31,6 +33,11 @@ const Join = () => {
   const [grpData, setGrpData] = useState([])
   console.log(grpData)
   const { user } = useSelector(selectUser)
+  const { status } = useSelector(selectGroup)
+  console.log("GROUP", status)
+  const [selectedIndex, setSelectedIndex] = useState([])
+  console.log("Index", selectedIndex)
+  const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const fetchGroupData = async () => {
@@ -46,13 +53,30 @@ const Join = () => {
     } catch (e) {
       console.log(e)
     }
+   
   }
   useEffect(() => {
     fetchGroupData()
   }, [])
 
-  const handleCreateRequest = (data) => {
-    console.log("ID",data)
+  const handleCreateRequest = (data, index) => {
+
+    setSelectedIndex(prev => {
+      const isInclude = selectedIndex.includes(index)
+      if (isInclude) {
+        return selectedIndex.filter(item => item !== index)
+      } else {
+        return [...prev, index]
+      }
+    })
+    const requestData = {
+      "senderid": user.sub,
+      "receiverid": data[1],
+      "groupid": data[0],
+      "status": 0,
+    }
+    
+    dispatch(createGroupRequestAsync(requestData))
   }
 
   return (
@@ -85,32 +109,20 @@ const Join = () => {
             </Tr>
           </Thead>
           <Tbody background='white'>
-            {grpData.map((item) => (
-              <Tr>
+            {grpData.map((item, index) => (
+              <Tr key={index}>
                 <Td textAlign="center">{item.groupname}</Td>
                 {/* <Td textAlign="center">3</Td> */}
                 <Td textAlign="center">{item.date}</Td>
                 <Td textAlign="center">{item.time}</Td>
                 <Td textAlign="center">{item.location}</Td>
-                <Td textAlign="center"><Button variant='ghost' colorScheme="green" onClick={() => handleCreateRequest([item.id, item.host])}>Join</Button></Td>
+                {!selectedIndex.includes(index) ?
+                <Td textAlign="center"><Button variant='ghost' colorScheme="green" onClick={() => handleCreateRequest([item.id, item.host],index)} >Join</Button></Td>
+                :
+                <Td textAlign="center"><Icon w={6} h={6} color='green.500' as={MdCheckCircle} /></Td>
+                }
               </Tr>
             ))}
-            {/* <Tr>
-              <Td textAlign="center">BI</Td>
-              <Td textAlign="center">3</Td>
-              <Td textAlign="center">23/4/2023</Td>
-              <Td textAlign="center">3:00 PM</Td>
-              <Td textAlign="center">The Coffee House Tran Hung Dao</Td>
-              <Td textAlign="center"><Button variant='ghost' colorScheme="green">Join</Button></Td>
-            </Tr>
-            <Tr>
-              <Td textAlign="center">BI</Td>
-              <Td textAlign="center">3</Td>
-              <Td textAlign="center">23/4/2023</Td>
-              <Td textAlign="center">3:00 PM</Td>
-              <Td textAlign="center">The Coffee House Tran Hung Dao</Td>
-              <Td textAlign="center"><Button variant='ghost' colorScheme="green">Join</Button></Td>
-            </Tr> */}
           </Tbody>
         </Table>
         <Flex w='100%'>
@@ -125,3 +137,5 @@ const Join = () => {
 }
 
 export default Join;
+
+

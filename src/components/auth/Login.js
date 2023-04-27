@@ -67,6 +67,23 @@ export function Login() {
     Email: 'Enter your email',
     'Phone Number': 'Enter your phone number',
   });
+
+  const formFields = {
+    signUp: {
+      username: {
+        label: 'Email:',
+        placeholder: 'Enter your Email:',
+        order: 1,
+      },
+    },
+    signIn: {
+      username: {
+        label: 'Email:',
+        placeholder: 'Enter your Email:',
+        order: 1,
+      }
+    },
+  }
   const { route, user } = useAuthenticator((context) => [context.route, context.user]);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -81,7 +98,7 @@ export function Login() {
   return (
     <View className="auth-wrapper">
        <ThemeProvider theme={theme}>
-        <Authenticator></Authenticator>
+        <Authenticator formFields={formFields} signUpAttributes={['name']}></Authenticator>
        </ThemeProvider>
     </View>
   );

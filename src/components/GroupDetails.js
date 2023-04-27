@@ -2,13 +2,14 @@ import { Box, HStack, Heading, Icon, StackDivider, Table, TableContainer, Tbody,
 import { useEffect, useState } from "react";
 import { MdNotifications } from "react-icons/md"
 import { useParams } from "react-router-dom"
-import { getGroupbyId, getAllGroupNUser } from "../dynamoDB";
+import { getGroupbyId, getAllGroupNUser, getAllUser } from "../dynamoDB";
 
 
 const GroupDetails = () => {
     let params = useParams();
     const [currentGroup, setCurrentGroup] = useState([]);
     const [groups, setGroups] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         getGroupbyId(params.groupid).then((res) => {
@@ -18,6 +19,11 @@ const GroupDetails = () => {
         getAllGroupNUser().then((res) => {
             setGroups(res)
         });
+
+        getAllUser().then((res) => {
+            setUsers(res)
+            console.log(res)
+        })
     }, [])
 
     return (
@@ -97,7 +103,12 @@ const GroupDetails = () => {
                                         g.groupid == params.groupid
                                     ).map((group) => (
                                         <Tr key={group.id}>
-                                            <Td pl="2" pt="4" pb="4">{group.userid}</Td>
+                                            <Td pl="2" pt="4" pb="4">
+                                                {
+                                                    users?.Items?.filter((user) => user.id == group.userid)
+                                                    .map((u) => (u.username))
+                                                }
+                                            </Td>
                                             <Td pl="2" pt="4" pb="4">{group.role == "host" ? "Admin" : "Member"}</Td>
                                         </Tr>
                                     ))}

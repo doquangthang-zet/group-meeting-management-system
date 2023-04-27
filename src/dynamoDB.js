@@ -1,13 +1,20 @@
 
-const groupAPI = 'https://sm6y72lnrl.execute-api.ap-southeast-1.amazonaws.com/new_dev/groups'
-const groupAPISpec = 'https://sm6y72lnrl.execute-api.ap-southeast-1.amazonaws.com/new_dev/groups/'
-const groupNUserAPI = ' https://1f4rcj5abe.execute-api.ap-southeast-1.amazonaws.com/dev/groupnuser'
+export const groupAPI = 'https://sm6y72lnrl.execute-api.ap-southeast-1.amazonaws.com/new_dev/groups'
+export const groupAPISpec = 'https://sm6y72lnrl.execute-api.ap-southeast-1.amazonaws.com/new_dev/groups/'
+export const groupNUserAPI = ' https://1f4rcj5abe.execute-api.ap-southeast-1.amazonaws.com/dev/groupnuser'
 const groupNUserAPISpec = ' https://1f4rcj5abe.execute-api.ap-southeast-1.amazonaws.com/dev/groupnuser/'
+const notifAPI = 'https://p5acd4z3y4.execute-api.ap-southeast-1.amazonaws.com/dev/request'
+const notifSpecAPI = 'https://p5acd4z3y4.execute-api.ap-southeast-1.amazonaws.com/dev/request/'
 const userAPI = "https://7cgo7g7yy2.execute-api.ap-southeast-1.amazonaws.com/dev/users"
 const userAPISpec = "https://7cgo7g7yy2.execute-api.ap-southeast-1.amazonaws.com/dev/users/"
 //--------------CRUD Group------------------//
 //Mốt chỉnh lại cái lambda function đẻ thêm date với giờ vào nữa 
-const createGroup = async (data) => {
+// const fetchGroupData = () => {
+//     fetch(groupAPI)
+//     .then((res) => {return(res.json())})
+// }
+
+const createGroup = (data) => {
     fetch(groupAPI, {
             method: 'PUT',
             headers: {
@@ -85,7 +92,50 @@ const getAllGroupNUser = () => {
     })
 }
 
+//-------------Notifications-----------------
+const createRequest = (data) => {
+    fetch(notifAPI, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    })
+}
 
+const deleteRequest = (data, id) => {
+    fetch(notifSpecAPI + id, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    }).then((res) => {
+        window.location.reload()
+    })
+}
+
+const updateRequest = (data, id) => {
+    fetch(notifSpecAPI + id, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    })
+}
+
+//-------------Users-----------------
+//Get all Users
+const getAllUser = () => {
+    return fetch(userAPI).then((res) => {
+        return res.json();
+    }).then((resp) => {
+        return resp
+    })
+}
 export {
     createGroup,
     updateGroup,
@@ -93,5 +143,9 @@ export {
     getGroupbyId,
     createGroupNUser,
     deleteGroupNUser,
+    createRequest,
+    deleteRequest,
+    updateRequest,
     getAllGroupNUser,
+    getAllUser,
 }

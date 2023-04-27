@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from '../redux/slices/groupSlice'
 import { selectUser } from "../redux/slices/userSlice";
 import {
-	Button,
-	Box,
-	Heading,
+  Button,
+  Box,
+  Heading,
   VStack,
   InputGroup,
   InputLeftElement,
@@ -18,44 +18,65 @@ import {
   Td,
   Flex,
 } from '@chakra-ui/react'
-import { HiOutlineUserGroup, HiOutlineSearch} from "react-icons/hi";
-import { MdGroupAdd} from "react-icons/md";
+import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
+import { MdGroupAdd } from "react-icons/md";
 import { useDisclosure } from "@chakra-ui/react";
 import CreateGroup from "./CreateGroup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchGroupData, groupAPI, groupNUserAPI } from "../dynamoDB";
+import { useEffect, useState } from "react";
 
 const Group = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { user } = useSelector(selectUser)
+  // console.log(user)
   const navigate = useNavigate();
   const navigateToJoin = () => {
     navigate('/join')
   }
-  const navigateToGroupDetails = () => {
-    navigate('/groupDetails/GSXTWDPcgBRMEhfVJATg9')
+  const [grpData, setGrpData] = useState([])
+  console.log(grpData)
+
+  const fetchGroupData = async () => {
+    const response = await fetch(groupAPI)
+    const currentResponse = await fetch(groupNUserAPI)
+    try {
+      const responseJson = await response.json()
+      const currentJson = await currentResponse.json()
+      const newCurrent = currentJson.Items.filter((item) => item.userid === user.sub).map(value => value.groupid)
+      const result = responseJson.Items.filter((item) => newCurrent.includes(item.id))
+      console.log(newCurrent)
+      setGrpData(result)
+    } catch (e) {
+      console.log(e)
+    }
   }
+  useEffect(() => {
+    fetchGroupData()
+  }, [])
+
   return (
-    <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto"> 
-        <Heading
-          color="#A27083"
-          textAlign="center"
-          fontSize='2xl'
+    <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto">
+      <Heading
+        color="#A27083"
+        textAlign="center"
+        fontSize='2xl'
       >
-          Group
+        Group
       </Heading>
-    {/* <Divider orientation='horizontal' /> */}
-    <VStack>
-      <InputGroup mt="10px" mb="10px">
-        <InputLeftElement
-          pointerEvents='none'
-          children={<HiOutlineSearch color='gray.300' />}
-        />
-        <Input placeholder='Search...' />
-      </InputGroup>
+      {/* <Divider orientation='horizontal' /> */}
+      <VStack>
+        <InputGroup mt="10px" mb="10px">
+          <InputLeftElement
+            pointerEvents='none'
+            children={<HiOutlineSearch color='gray.300' />}
+          />
+          <Input placeholder='Search...' />
+        </InputGroup>
         <Table variant='simple' size="lg">
           <Thead bg="#A27083">
             <Tr>
               <Th color="white">Name</Th>
-              <Th color="white">Members</Th>
               <Th color="white">Date</Th>
               <Th color="white">Time</Th>
               <Th color="white">Location</Th>
@@ -63,56 +84,39 @@ const Group = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr onClick={() => navigateToGroupDetails()}>
-              <Td>Cloud Computing</Td>
-              <Td>3</Td>
-              <Td >25/4/2023</Td>
-              <Td>3:00PM</Td>
-              <Td>RMIT</Td>
-              <Td ><Button
-                variant='ghost' colorScheme="red">
-                  Leave
-                </Button></Td>
-            </Tr>
-            <Tr>
-              <Td>Cloud Computing</Td>
-              <Td>3</Td>
-              <Td >25/4/2023</Td>
-              <Td>3:00PM</Td>
-              <Td>RMIT</Td>
-              <Td ><Button
-                variant='ghost' colorScheme="red">
-                  Leave
-                </Button></Td>
-            </Tr>
-            <Tr>
-              <Td>Cloud Computing</Td>
-              <Td>3</Td>
-              <Td >25/4/2023</Td>
-              <Td>3:00PM</Td>
-              <Td>RMIT</Td>
-              <Td ><Button
-                variant='ghost' colorScheme="red">
-                  Leave
-                </Button></Td>
-            </Tr>
+              {
+                grpData.map((group) =>(
+                  <Tr key= {group.id}>
+                    <Td><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
+                    <Td>{group.date}</Td>
+                    <Td>{group.time}</Td>
+                    <Td>{group.location}</Td>
+                    <Td >
+                      <Button
+                        variant='ghost' colorScheme="red">
+                        Leave
+                      </Button>
+                    </Td>
+                  </Tr>
+                ))
+              }
           </Tbody>
         </Table>
-      <Flex w="100%" justify="space-between">
+        <Flex w="100%" justify="space-between">
           <Button leftIcon={<HiOutlineUserGroup />} onClick={navigateToJoin} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
             Join Group
           </Button>
-          
+
           <Box>
             <Button onClick={onOpen} leftIcon={<MdGroupAdd />} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
               Create Group
             </Button>
             <CreateGroup isOpen={isOpen} onClose={onClose} />
           </Box>
-      </Flex>
-    </VStack>
+        </Flex>
+      </VStack>
     </Box>
-    )
+  )
 }
 
 export default Group

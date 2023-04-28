@@ -22,7 +22,7 @@ import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
 import { useDisclosure } from "@chakra-ui/react";
 import CreateGroup from "./CreateGroup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchGroupData, groupAPI, groupNUserAPI } from "../dynamoDB";
 import { useEffect, useState } from "react";
 
@@ -37,6 +37,9 @@ const Group = () => {
   const [grpData, setGrpData] = useState([])
   console.log(grpData)
 
+  const navigateToGroupDetails = (groupid) => {
+    navigate(`/groupDetails/${groupid}`)
+  }
   const fetchGroupData = async () => {
     const response = await fetch(groupAPI)
     const currentResponse = await fetch(groupNUserAPI)
@@ -87,15 +90,17 @@ const Group = () => {
               {
                 grpData.map((group) =>(
                   <Tr key= {group.id}>
-                  <Td>{group.groupname}</Td>
-                  <Td>{group.date}</Td>
-                  <Td>{group.time}</Td>
-                  <Td>{group.location}</Td>
-                  <Td ><Button
-                    variant='ghost' colorScheme="red">
-                    Leave
-                  </Button></Td>
-                </Tr>
+                    <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
+                    <Td>{group.date}</Td>
+                    <Td>{group.time}</Td>
+                    <Td>{group.location}</Td>
+                    <Td >
+                      <Button
+                        variant='ghost' colorScheme="red">
+                        Leave
+                      </Button>
+                    </Td>
+                  </Tr>
                 ))
               }
           </Tbody>

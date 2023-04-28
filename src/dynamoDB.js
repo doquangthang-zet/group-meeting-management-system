@@ -5,6 +5,8 @@ export const groupNUserAPI = ' https://1f4rcj5abe.execute-api.ap-southeast-1.ama
 const groupNUserAPISpec = ' https://1f4rcj5abe.execute-api.ap-southeast-1.amazonaws.com/dev/groupnuser/'
 const notifAPI = 'https://p5acd4z3y4.execute-api.ap-southeast-1.amazonaws.com/dev/request'
 const notifSpecAPI = 'https://p5acd4z3y4.execute-api.ap-southeast-1.amazonaws.com/dev/request/'
+const userAPI = "https://7cgo7g7yy2.execute-api.ap-southeast-1.amazonaws.com/dev/users"
+const userAPISpec = "https://7cgo7g7yy2.execute-api.ap-southeast-1.amazonaws.com/dev/users/"
 //--------------CRUD Group------------------//
 //Mốt chỉnh lại cái lambda function đẻ thêm date với giờ vào nữa 
 // const fetchGroupData = () => {
@@ -81,6 +83,15 @@ const deleteGroupNUser = (id) => {
     })
 }
 
+//Get all groupNUser
+const getAllGroupNUser = () => {
+    return fetch(groupNUserAPI).then((res) => {
+        return res.json();
+    }).then((resp) => {
+        return resp
+    })
+}
+
 //-------------Notifications-----------------
 const createRequest = (data) => {
     fetch(notifAPI, {
@@ -115,6 +126,16 @@ const updateRequest = (data, id) => {
         body: data
     })
 }
+
+//-------------Users-----------------
+//Get all Users
+const getAllUser = () => {
+    return fetch(userAPI).then((res) => {
+        return res.json();
+    }).then((resp) => {
+        return resp
+    })
+}
 export {
     createGroup,
     updateGroup,
@@ -125,4 +146,6 @@ export {
     createRequest,
     deleteRequest,
     updateRequest,
+    getAllGroupNUser,
+    getAllUser,
 }

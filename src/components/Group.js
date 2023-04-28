@@ -37,6 +37,9 @@ const Group = () => {
   const [grpData, setGrpData] = useState([])
   console.log(grpData)
 
+  const navigateToGroupDetails = (groupid) => {
+    navigate(`/groupDetails/${groupid}`)
+  }
   const fetchGroupData = async () => {
     const response = await fetch(groupAPI)
     const currentResponse = await fetch(groupNUserAPI)
@@ -87,7 +90,7 @@ const Group = () => {
               {
                 grpData.map((group) =>(
                   <Tr key= {group.id}>
-                    <Td><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
+                    <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
                     <Td>{group.date}</Td>
                     <Td>{group.time}</Td>
                     <Td>{group.location}</Td>

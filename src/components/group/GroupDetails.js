@@ -1,8 +1,31 @@
 import { Box, HStack, Heading, Icon, StackDivider, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack } from "@chakra-ui/react"
+import { useEffect, useState } from "react";
 import { MdNotifications } from "react-icons/md"
+import { useParams } from "react-router-dom"
+import { getGroupbyId, getAllGroupNUser, getAllUser } from "../../dynamoDB";
 
 
 const GroupDetails = () => {
+    let params = useParams();
+    const [currentGroup, setCurrentGroup] = useState([]);
+    const [groups, setGroups] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        getGroupbyId(params.groupid).then((res) => {
+            setCurrentGroup(res)
+        })
+        
+        getAllGroupNUser().then((res) => {
+            setGroups(res)
+        });
+
+        getAllUser().then((res) => {
+            setUsers(res)
+            console.log(res)
+        })
+    }, [])
+
     return (
         <Box>
             <VStack
@@ -16,7 +39,7 @@ const GroupDetails = () => {
                     textAlign="center"
                     fontSize='2xl'
                 >
-                    Group's Name
+                    {currentGroup.Item ? currentGroup.Item.groupname : "Group's Name"}
                 </Heading>
 
                 <VStack
@@ -32,7 +55,7 @@ const GroupDetails = () => {
                         borderColor='#A27083'
                     >
                         <Text>
-                            Date: 23/4/2023
+                            Date: {currentGroup.Item && currentGroup.Item.date}
                         </Text>
                     </Box>
                     <Box
@@ -43,7 +66,7 @@ const GroupDetails = () => {
                         borderColor='#A27083'
                     >
                         <Text>
-                            Time: 2:00PM
+                            Time: {currentGroup.Item && currentGroup.Item.time}
                         </Text>
                     </Box>
                     <Box
@@ -54,7 +77,7 @@ const GroupDetails = () => {
                         borderColor='#A27083'
                     >
                         <Text>
-                            Meeting Location: The coffee house Tran Hung Dao
+                            Meeting Location: {currentGroup.Item && currentGroup.Item.location}
                         </Text>
                     </Box>
                     <VStack
@@ -76,22 +99,19 @@ const GroupDetails = () => {
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    <Tr>
-                                        <Td pl="2" pt="4" pb="4">May Tran</Td>
-                                        <Td pl="2" pt="4" pb="4">Admin</Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td pl="2" pt="4" pb="4">Hula</Td>
-                                        <Td pl="2" pt="4" pb="4">Member</Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td pl="2" pt="4" pb="4">Han</Td>
-                                        <Td pl="2" pt="4" pb="4">Member</Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td pl="2" pt="4" pb="4">Thang</Td>
-                                        <Td pl="2" pt="4" pb="4">Member</Td>
-                                    </Tr>
+                                    {groups && groups.Items?.filter((g) => 
+                                        g.groupid == params.groupid
+                                    ).map((group) => (
+                                        <Tr key={group.id}>
+                                            <Td pl="2" pt="4" pb="4">
+                                                {
+                                                    users?.Items?.filter((user) => user.id == group.userid)
+                                                    .map((u) => (u.username))
+                                                }
+                                            </Td>
+                                            <Td pl="2" pt="4" pb="4">{group.role == "host" ? "Admin" : "Member"}</Td>
+                                        </Tr>
+                                    ))}
                                 </Tbody>
                             </Table>
                         </TableContainer>

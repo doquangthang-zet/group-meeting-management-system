@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../../redux/slices/groupSlice'
 import { selectUser } from "../../redux/slices/userSlice";
 import {
   Button,
@@ -24,7 +23,7 @@ import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
 import { useDisclosure } from "@chakra-ui/react";
 import CreateGroup from "./CreateGroup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchGroupData, groupAPI, groupNUserAPI } from "../../dynamoDB";
 import { useEffect, useState } from "react";
 
@@ -40,6 +39,9 @@ const Group = () => {
   const [loading, setLoading] = useState(true)
   console.log(grpData)
 
+  const navigateToGroupDetails = (groupid) => {
+    navigate(`/groupDetails/${groupid}`)
+  }
   const fetchGroupData = async () => {
     const response = await fetch(groupAPI)
     const currentResponse = await fetch(groupNUserAPI)
@@ -101,7 +103,7 @@ const Group = () => {
               </Tr>
               : grpData.map((group) => (
                 <Tr key={group.id}>
-                  <Td>{group.groupname}</Td>
+                  <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
                   <Td>{group.date}</Td>
                   <Td>{group.time}</Td>
                   <Td>{group.location}</Td>

@@ -1,6 +1,8 @@
 // RequireAuth.js
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import { useAuthenticator } from '@aws-amplify/ui-react';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../redux/slices/userSlice';
 
 export function RequireAuth({ route }) {
   // const location = useLocation();

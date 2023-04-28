@@ -5,8 +5,8 @@ export const groupNUserAPI = ' https://1f4rcj5abe.execute-api.ap-southeast-1.ama
 export const groupNUserAPISpec = ' https://1f4rcj5abe.execute-api.ap-southeast-1.amazonaws.com/dev/groupnuser/'
 export const notifAPI = 'https://p5acd4z3y4.execute-api.ap-southeast-1.amazonaws.com/dev/request'
 export const notifSpecAPI = 'https://p5acd4z3y4.execute-api.ap-southeast-1.amazonaws.com/dev/request/'
-export const userAPI = 'https://7cgo7g7yy2.execute-api.ap-southeast-1.amazonaws.com/dev/users'
-export const userSpecAPI = 'https://7cgo7g7yy2.execute-api.ap-southeast-1.amazonaws.com/dev/users/'
+export const userAPI = "https://7cgo7g7yy2.execute-api.ap-southeast-1.amazonaws.com/dev/users"
+export const userAPISpec = "https://7cgo7g7yy2.execute-api.ap-southeast-1.amazonaws.com/dev/users/"
 //--------------CRUD Group------------------//
 //Mốt chỉnh lại cái lambda function đẻ thêm date với giờ vào nữa 
 // const fetchGroupData = () => {
@@ -83,6 +83,15 @@ const deleteGroupNUser = (id) => {
     })
 }
 
+//Get all groupNUser
+const getAllGroupNUser = () => {
+    return fetch(groupNUserAPI).then((res) => {
+        return res.json();
+    }).then((resp) => {
+        return resp
+    })
+}
+
 //-------------Notifications-----------------
 const createRequest = (data) => {
     fetch(notifAPI, {
@@ -120,7 +129,15 @@ const updateRequest = (data, id) => {
 
 //----------------------------User---------------------//
 const getUserbyId = async (id) =>{
-    return await fetch(userSpecAPI + id).then((res) => {
+    return await fetch(userAPISpec + id).then((res) => {
+        return res.json();
+    }).then((resp) => {
+        return resp
+    })}
+//-------------Users-----------------
+//Get all Users
+const getAllUser = () => {
+    return fetch(userAPI).then((res) => {
         return res.json();
     }).then((resp) => {
         return resp
@@ -137,4 +154,6 @@ export {
     deleteRequest,
     updateRequest,
     getUserbyId,
+    getAllGroupNUser,
+    getAllUser,
 }

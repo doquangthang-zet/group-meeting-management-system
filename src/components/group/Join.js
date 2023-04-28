@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { createGroupRequestAsync, decrement, increment, selectGroup } from '../redux/slices/groupSlice'
-import { selectUser } from "../redux/slices/userSlice";
+import { createGroupRequestAsync, decrement, increment, selectGroup } from '../../redux/slices/groupSlice'
+import { selectUser } from "../../redux/slices/userSlice";
 import {
   Input,
   InputGroup,
@@ -29,7 +29,7 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { MdGroupAdd, MdCheckCircle, MdAdd } from "react-icons/md";
 import CreateGroup from "./CreateGroup";
 import { useDisclosure } from "@chakra-ui/react";
-import { createRequest, groupAPI, groupNUserAPI, notifAPI } from "../dynamoDB";
+import { createRequest, groupAPI, groupNUserAPI, notifAPI } from "../../dynamoDB";
 
 
 const Join = () => {
@@ -165,7 +165,7 @@ const Join = () => {
           </Tbody>
         </Table>
         <Flex w='100%'>
-          <Button leftIcon={<MdGroupAdd color='#E48181' />} mt='1' float='right' onClick={onOpen} color='#E48181' FlexShadow="2xl" background='white' borderRadius='10' size='md' alignItems='center'>
+          <Button leftIcon={<MdGroupAdd color='#E48181' />} mt='1' float='right' onClick={onOpen} color='#E48181' background='white' borderRadius='10' size='md' alignItems='center'>
             Create Group
           </Button>
           <CreateGroup isOpen={isOpen} onClose={onClose} />

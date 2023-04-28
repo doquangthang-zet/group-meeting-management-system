@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../redux/slices/groupSlice'
-import { selectUser } from "../redux/slices/userSlice";
+import { decrement, increment } from '../../redux/slices/groupSlice'
+import { selectUser } from "../../redux/slices/userSlice";
 import {
   Button,
   Box,
@@ -25,7 +25,7 @@ import { MdGroupAdd } from "react-icons/md";
 import { useDisclosure } from "@chakra-ui/react";
 import CreateGroup from "./CreateGroup";
 import { useNavigate } from "react-router-dom";
-import { fetchGroupData, groupAPI, groupNUserAPI } from "../dynamoDB";
+import { fetchGroupData, groupAPI, groupNUserAPI } from "../../dynamoDB";
 import { useEffect, useState } from "react";
 
 const Group = () => {

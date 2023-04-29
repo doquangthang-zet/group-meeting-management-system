@@ -2,7 +2,7 @@ import { Box, HStack, Heading, Icon, StackDivider, Table, TableContainer, Tbody,
 import { useEffect, useState } from "react";
 import { MdNotifications } from "react-icons/md"
 import { useParams } from "react-router-dom"
-import { getGroupbyId, getAllGroupNUser, getAllUser } from "../dynamoDB";
+import { getGroupbyId, getAllGroupNUser, getAllUser } from "../../dynamoDB";
 
 
 const GroupDetails = () => {

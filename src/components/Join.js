@@ -122,5 +122,3 @@ const Join = () => {
     </Box >
   )
 }
-
-export default Join;

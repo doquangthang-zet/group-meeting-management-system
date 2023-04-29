@@ -25,7 +25,6 @@ export const createGroupRequestAsync = createAsyncThunk('group/createGroupReques
     }
     const final_requestInfo = JSON.stringify(requestInfo)
     await createRequest(final_requestInfo)
-
 })
 
 export const groupSlice = createSlice({

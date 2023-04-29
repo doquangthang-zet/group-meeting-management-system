@@ -8,9 +8,94 @@ import {
 	Input,
 	HStack,
 } from '@chakra-ui/react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { createGroupAsync } from '../redux/slices/groupSlice';
+import { selectUser } from '../redux/slices/userSlice';
+import { nanoid } from '@reduxjs/toolkit';
+import { useToast } from '@chakra-ui/react';
 
+const STATUS_IDLE = 0
+const STATUS_CREATING = 1
 
 const CreateGroup = ({isOpen, onClose}) => {
+    const [status, setStatus] = useState(STATUS_IDLE)
+    const [name, setName] = useState("");
+    const [date, setDate] = useState("")
+    const[time, setTime] = useState("")
+    const [location, setLocation] = useState("")
+    const {user} = useSelector(selectUser)
+    const dispatch = useDispatch();
+    const groupID = nanoid();
+    const groupNuserID = nanoid();
+    const userID = user.sub;
+    const toast = useToast()
+
+    const handleAdd = async() => {
+        if(name === ""){
+            toast({
+                title: "Missing Name",
+                description: "Please enter a name for this group",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+              })
+			return
+        }
+        if(date === ""){
+            toast({
+                title: "Missing date",
+                description: "Please enter a meeting date for this group",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+              })
+			return
+        }
+        if(time === ""){
+            toast({
+                title: "Missing time",
+                description: "Please enter meeting time for this group",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+              })
+			return
+        }
+        if(location === ""){
+            toast({
+                title: "Missing location",
+                description: "Please enter a meeting location for this group",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+              })
+			return
+        }
+        try{
+            setStatus(STATUS_CREATING)
+            dispatch(createGroupAsync({groupID, date, name, userID, location, time, groupNuserID}))
+            setStatus(STATUS_IDLE)
+            toast({
+                title: "Success",
+                description: "Your group is successfully created!",
+                status: "success",
+                duration: 4000,
+                isClosable: true,
+              })
+
+			onClose()
+        } catch(e){
+            toast({
+                title: "Unexpected Error",
+                description: "There is an error when creating new group. Please try again in a few minutes.",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+            })
+        }
+    }
+        
   
     return(
     <Modal isOpen={isOpen} onClose={onClose}
@@ -37,7 +122,8 @@ const CreateGroup = ({isOpen, onClose}) => {
                     w={{base: "100%", sm: "70%"}}
                     borderColor="black"
                     maxH="35px"
-                    placeholder="Name"
+                    value={name} 
+                    onChange={(e) => setName(e.target.value)}
                 />
             </HStack>
             <HStack mt="10px">
@@ -47,7 +133,8 @@ const CreateGroup = ({isOpen, onClose}) => {
                     w={{base: "100%", sm: "70%"}}
                     borderColor="black"
                     maxH="35px"
-                    placeholder="Date"
+                    value={date} 
+                    onChange={(e) => setDate(e.target.value)}
                 />
             </HStack>
             <HStack mt="10px">
@@ -57,7 +144,8 @@ const CreateGroup = ({isOpen, onClose}) => {
                     w={{base: "100%", sm: "70%"}}
                     borderColor="black"
                     maxH="35px"
-                    placeholder="Time"
+                    value={time} 
+                    onChange={(e) => setTime(e.target.value)}
                 />
             </HStack>
             <HStack mt="10px">
@@ -67,7 +155,8 @@ const CreateGroup = ({isOpen, onClose}) => {
                     w={{base: "100%", sm: "70%"}}
                     borderColor="black"
                     maxH="35px"
-                    placeholder="Location"
+                    value={location} 
+                    onChange={(e) => setLocation(e.target.value)}
                 />
             </HStack>
         </ModalBody>
@@ -90,6 +179,7 @@ const CreateGroup = ({isOpen, onClose}) => {
                         bg="#A27083"
                         w="90%"
                         loadingText="Creating group"
+                        onClick={() => handleAdd()}
                     >
                         Create
                     </Button>

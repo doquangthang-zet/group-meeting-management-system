@@ -29,19 +29,16 @@ import { groupAPI, groupNUserAPI } from "../dynamoDB";
 const Join = () => {
   const count = useSelector((state) => state.group.value)
   const [grpData, setGrpData] = useState([])
-  console.log(grpData)
   const { user } = useSelector(selectUser)
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   const fetchGroupData = async () => {
-    const response = await fetch(groupAPI)
+    const response = await fetch (groupAPI)
     const currentResponse = await fetch(groupNUserAPI)
     try {
       const responseJson = await response.json()
       const currentJson = await currentResponse.json()
-      const newCurrent = currentJson.Items.filter((item) => item.userid === user.sub).map(value => value.groupid)
-      const result = responseJson.Items.filter((item) => !newCurrent.includes(item.id))
-      console.log(newCurrent)
+      const newCurrent = currentJson.Items.filter((item) => item.userid !== user.sub).map(value => value.groupid)
+      const result = responseJson.Items.filter((item) => newCurrent.includes(item.id))
       setGrpData(result)
     } catch (e) {
       console.log(e)
@@ -50,6 +47,24 @@ const Join = () => {
   useEffect(() => {
     fetchGroupData()
   }, [])
+  // const fetchGroupData = async () => {
+  //   const response = await fetch(groupAPI)
+  //   const currentResponse = await fetch(groupNUserAPI)
+  //   try {
+  //     const responseJson = await response.json()
+  //     const currentJson = await currentResponse.json()
+  //     const newCurrent = currentJson.Items.filter((item) => item.userid === user.sub).map(value => value.groupid)
+  //     const result = responseJson.Items.filter((item) => !newCurrent.includes(item.id))
+  //     console.log(newCurrent)
+  //     setGrpData(result)
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+  // useEffect(() => {
+  //   fetchGroupData()
+  // }, [])
+  
 
   const handleCreateRequest = (data) => {
     console.log("ID",data)
@@ -86,7 +101,7 @@ const Join = () => {
           </Thead>
           <Tbody background='white'>
             {grpData.map((item) => (
-              <Tr>
+              <Tr key={item.id}>
                 <Td textAlign="center">{item.groupname}</Td>
                 {/* <Td textAlign="center">3</Td> */}
                 <Td textAlign="center">{item.date}</Td>
@@ -95,22 +110,6 @@ const Join = () => {
                 <Td textAlign="center"><Button variant='ghost' colorScheme="green" onClick={() => handleCreateRequest([item.id, item.host])}>Join</Button></Td>
               </Tr>
             ))}
-            {/* <Tr>
-              <Td textAlign="center">BI</Td>
-              <Td textAlign="center">3</Td>
-              <Td textAlign="center">23/4/2023</Td>
-              <Td textAlign="center">3:00 PM</Td>
-              <Td textAlign="center">The Coffee House Tran Hung Dao</Td>
-              <Td textAlign="center"><Button variant='ghost' colorScheme="green">Join</Button></Td>
-            </Tr>
-            <Tr>
-              <Td textAlign="center">BI</Td>
-              <Td textAlign="center">3</Td>
-              <Td textAlign="center">23/4/2023</Td>
-              <Td textAlign="center">3:00 PM</Td>
-              <Td textAlign="center">The Coffee House Tran Hung Dao</Td>
-              <Td textAlign="center"><Button variant='ghost' colorScheme="green">Join</Button></Td>
-            </Tr> */}
           </Tbody>
         </Table>
         <Flex w='100%'>

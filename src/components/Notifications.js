@@ -2,9 +2,6 @@ import React from 'react';
 import {Card, CardBody, Text, CardHeader, Heading, IconButton} from "@chakra-ui/react"
 import {BsCheck2} from "react-icons/bs";
 import {IoMdClose} from "react-icons/io";
-import { useSelector } from 'react-redux';
-import { selectUser } from '../redux/slices/userSlice';
-import { useState } from 'react';
 
 const Notifications = () => {
     return (

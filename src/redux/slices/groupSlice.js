@@ -26,6 +26,5 @@ export const groupSlice = createSlice({
 })
 
 export const { increment, decrement, incrementByAmount } = groupSlice.actions
-export const selectGroup = (state) => state.group
 
 export default groupSlice.reducer

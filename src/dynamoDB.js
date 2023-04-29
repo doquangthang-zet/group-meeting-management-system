@@ -104,7 +104,7 @@ const createRequest = (data) => {
     })
 }
 
-const deleteRequest = (data, id) => {
+const deleteRequest = (id) => {
     fetch(notifSpecAPI + id, {
         method: 'DELETE',
         headers: {
@@ -116,8 +116,8 @@ const deleteRequest = (data, id) => {
     })
 }
 
-const updateRequest = (data, id) => {
-    fetch(notifSpecAPI + id, {
+const updateRequest = (data) => {
+    fetch(notifSpecAPI, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -134,7 +134,7 @@ const getUserbyId = async (id) =>{
     }).then((resp) => {
         return resp
     })}
-//-------------Users-----------------
+
 //Get all Users
 const getAllUser = () => {
     return fetch(userAPI).then((res) => {

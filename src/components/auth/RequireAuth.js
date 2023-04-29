@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/slices/userSlice';
 
 export function RequireAuth({ route }) {
-  // const location = useLocation();
+  const location = useLocation();
   // const { route } = useAuthenticator((context) => [context.route]);
   // if (route !== 'authenticated') {
   //   return <Navigate to="/login" state={{ from: location }} replace />;
@@ -14,6 +14,6 @@ export function RequireAuth({ route }) {
   return route == "authenticated" ? (
 		<Outlet />
 		) : (
-		<Navigate to="/login" replace />
+		<Navigate to="/login" state={{ from: location }} replace />
 	);
 }

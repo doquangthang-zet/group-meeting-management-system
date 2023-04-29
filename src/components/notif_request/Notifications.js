@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardBody, Text, CardHeader, Heading, IconButton, VStack, Box, Spinner, Center } from "@chakra-ui/react"
 import { BsCheck2 } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
-import { getUserbyId, notifAPI } from '../../dynamoDB';
+import { createGroupNUser, getUserbyId, notifAPI, updateRequest } from '../../dynamoDB';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/slices/userSlice';
 import { useEffect } from 'react';
@@ -36,8 +36,6 @@ const Notifications = () => {
         const result = []
         try {
             const userData = await fetchSenderData(reflist)
-            console.log("USERDATA", userData)
-            console.log(userData)
             for (let i = 0; i < reflist.length; i++) {
                 let senderData = userData[reflist[i].senderid]
 
@@ -74,7 +72,6 @@ const Notifications = () => {
             }
         }
         setUserDict(senderData)
-        console.log("SENDERDATA", senderData)
         return senderData
     }
 
@@ -84,9 +81,31 @@ const Notifications = () => {
     }, [])
 
 
-    //Handle change status
-    const handleChange = (status) => {
-        console.log("data", status)
+    //Handle change status (Data = status + notifData)
+    const handleChange = async (data) => {
+        const {id, groupid, receiverid, senderid} = data.data;
+        try{
+
+        }catch(e){
+            //update request status
+            const newRequestInfo = {
+                id: id,
+                groupid: groupid,
+                receiverid: receiverid,
+                senderid: senderid,
+                status: data.status
+            }
+            const fRequestInfo = JSON.stringify(newRequestInfo)
+    
+            updateRequest(fRequestInfo)
+    
+            //Add user to group
+            
+        }
+
+        
+
+        
     }
 
     return (
@@ -108,8 +127,8 @@ const Notifications = () => {
                         </CardHeader>
                         <CardBody mt="-1em">
                             <Text ml="0.5em">{item.senderEmail} wanted to join your group!
-                                <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose size="2em" color="#E48181" />} onClick={() => handleChange(STATUS_REJECTED)} />
-                                <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right" size="2em" color="#306643" />} onClick={() => handleChange(STATUS_ACCEPTED)} />
+                                <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose size="2em" color="#E48181" />} onClick={() => handleChange({status: STATUS_REJECTED, data: item})} />
+                                <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right" size="2em" color="#306643" />} onClick={() => handleChange({status: STATUS_ACCEPTED, data: item})} />
                             </Text>
                         </CardBody>
                     </Card>

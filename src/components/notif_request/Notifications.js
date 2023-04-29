@@ -85,8 +85,6 @@ const Notifications = () => {
     const handleChange = async (data) => {
         const {id, groupid, receiverid, senderid} = data.data;
         try{
-
-        }catch(e){
             //update request status
             const newRequestInfo = {
                 id: id,
@@ -98,14 +96,14 @@ const Notifications = () => {
             const fRequestInfo = JSON.stringify(newRequestInfo)
     
             updateRequest(fRequestInfo)
+            console.log(newRequestInfo)
     
+            console.log("NHan")
             //Add user to group
             
+        }catch(e){
         }
 
-        
-
-        
     }
 
     return (

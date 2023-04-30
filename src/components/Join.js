@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../redux/slices/groupSlice'
 import { selectUser } from "../redux/slices/userSlice";
 import {
   Input,
@@ -24,6 +23,7 @@ import { MdGroupAdd } from "react-icons/md";
 import CreateGroup from "./CreateGroup";
 import { useDisclosure } from "@chakra-ui/react";
 import { groupAPI, groupNUserAPI } from "../dynamoDB";
+import { useNavigate } from "react-router-dom";
 
 
 const Join = () => {
@@ -32,6 +32,10 @@ const Join = () => {
   console.log(grpData)
   const { user } = useSelector(selectUser)
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate();
+  const navigateToCreate = () => {
+    navigate('creategroup')
+  }
 
   const fetchGroupData = async () => {
     const response = await fetch(groupAPI)
@@ -113,12 +117,6 @@ const Join = () => {
             </Tr> */}
           </Tbody>
         </Table>
-        <Flex w='100%'>
-          <Button leftIcon={<MdGroupAdd color='#E48181' />} mt='1' float='right' onClick={onOpen} color='#E48181' FlexShadow="2xl" background='white' borderRadius='10' size='md' alignItems='center'>
-            Create Group
-          </Button>
-          <CreateGroup isOpen={isOpen} onClose={onClose} />
-        </Flex>
       </VStack>
     </Box >
   )

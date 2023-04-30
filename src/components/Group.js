@@ -34,6 +34,9 @@ const Group = () => {
   const navigateToJoin = () => {
     navigate('/join')
   }
+  const navigateToCreate = () => {
+    navigate('creategroup')
+  }
   const [grpData, setGrpData] = useState([])
   console.log(grpData)
 
@@ -109,13 +112,9 @@ const Group = () => {
           <Button leftIcon={<HiOutlineUserGroup />} onClick={navigateToJoin} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
             Join Group
           </Button>
-
-          <Box>
-            <Button onClick={onOpen} leftIcon={<MdGroupAdd />} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
-              Create Group
-            </Button>
-            <CreateGroup isOpen={isOpen} onClose={onClose} />
-          </Box>
+          <Button leftIcon={<MdGroupAdd />} onClick={navigateToCreate} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
+            Create Group
+          </Button>
         </Flex>
       </VStack>
     </Box>

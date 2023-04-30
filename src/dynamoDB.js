@@ -112,7 +112,7 @@ const deleteRequest = (id) => {
             'Content-Type': 'application/json',
         },
     }).then((res) => {
-        window.location.reload()
+        // window.location.reload()
     })
 }
 

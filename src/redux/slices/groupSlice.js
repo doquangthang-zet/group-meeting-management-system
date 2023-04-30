@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import { createGroupNUser, createRequest } from "../../dynamoDB";
+import {createGroup} from "../../dynamoDB"
 import { deleteRequest } from "../../dynamoDB";
 
 export const GROUP_IDLE = 0
@@ -12,6 +13,9 @@ export const GROUP_ADD_MEMBER_REJECTED = 6
 export const GROUP_DELETE_REQUEST_PENDING = 7
 export const GROUP_DELETE_REQUEST_SUCCESS = 8
 export const GROUP_DELETE_REQUEST_REJECTED = 9
+export const GROUP_CREATE_PENDING = 10
+export const GROUP_CREATE_REJECTED = 11
+export const GROUP_CREATE_SUCCESS = 12
 
 const initialState = {
     groupInfo:{
@@ -43,12 +47,34 @@ export const addMemberToGroupAsync = createAsyncThunk('group/addMemberToGroupAsy
     const fMemberInfo = JSON.stringify(memberInfo)
 
     await createGroupNUser(fMemberInfo)
-
 })
 
 export const deleteRequestAsync = createAsyncThunk('group/deleteRequestAsync', async(id) => {
     await deleteRequest(id)
 })
+
+
+export const createGroupAsync = createAsyncThunk('group/createGroupAsync', async(data) => {
+    const dataToJson = JSON.stringify({
+        id: data.groupID,
+        date: data.date,
+        groupname: data.name,
+        host: data.userID,
+        location: data.location,
+        time: data.time
+    })
+    const groupNuserToJson = JSON.stringify({
+        id: data.groupNuserID,
+        groupid: data.groupID,
+        role: "host",
+        userid: data.userID
+    })
+    console.log(data.groupNuserID)
+    console.log(groupNuserToJson)
+    await createGroup(dataToJson)
+    await createGroupNUser(groupNuserToJson)
+})
+
 
 export const groupSlice = createSlice({
     name: 'group',
@@ -87,6 +113,15 @@ export const groupSlice = createSlice({
             .addCase(deleteRequestAsync.rejected, state => {
                 state.status = GROUP_DELETE_REQUEST_REJECTED
             })
+            // .addCase(createGroupAsync.pending, state => {
+            //     state.status = GROUP_CREATE_PENDING
+            // })
+            // .addCase(createGroupAsync.fulfilled, (state,action) => {
+            //     state.status = GROUP_CREATE_SUCCESS
+            // })
+            // .addCase(createGroupAsync.pending, (state,action) => {
+            //     state.status = GROUP_CREATE_REJECTED
+            // })
     }
 })
 

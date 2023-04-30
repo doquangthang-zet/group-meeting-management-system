@@ -168,6 +168,7 @@ const Notifications = () => {
                 }
                 dispatch(addMemberToGroupAsync(addMemberInfo))
             } else if (data.status === STATUS_REJECTED) {
+                console.log(id)
                 dispatch(deleteRequestAsync(id))
             }
         } catch (e) {

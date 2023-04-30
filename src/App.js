@@ -12,8 +12,8 @@ import { Grid, GridItem } from '@chakra-ui/layout';
 import Navbar from './components/layout/Navbar';
 import Header from './components/layout/Header';
 import Group from "./components/group/Group"
-
 import Join from "./components/group/Join"
+import CreateGroup from './components/group/CreateGroup';
 import Notifications from './components/notif_request/Notifications';
 import GroupDetails from './components/group/GroupDetails';
 
@@ -52,6 +52,7 @@ function MyRoutes() {
                 <Route index element={<Group />} />
                 <Route path="/join" element={<Join />}/>
                 <Route path="/notifications" element={<Notifications />} />
+                <Route path="/creategroup" element={<CreateGroup />} />
                 <Route path="/groupdetails/:groupid" element={<GroupDetails />}/>
               </Route>
             </Route>

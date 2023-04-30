@@ -39,7 +39,6 @@ const Join = () => {
   const { user } = useSelector(selectUser)
   const { status } = useSelector(selectGroup)
   const [loading, setLoading] = useState(true)
-  console.log("Loading", loading)
   const [selectedIndex, setSelectedIndex] = useState([])
   const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -164,12 +163,6 @@ const Join = () => {
             }
           </Tbody>
         </Table>
-        <Flex w='100%'>
-          <Button leftIcon={<MdGroupAdd color='#E48181' />} mt='1' float='right' onClick={onOpen} color='#E48181' background='white' borderRadius='10' size='md' alignItems='center'>
-            Create Group
-          </Button>
-          <CreateGroup isOpen={isOpen} onClose={onClose} />
-        </Flex>
       </VStack>
     </Box >
   )

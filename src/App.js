@@ -14,6 +14,7 @@ import Header from './components/layout/Header';
 import Group from "./components/Group"
 import User from "./components/User"
 import Join from "./components/Join"
+import CreateGroup from './components/CreateGroup';
 import Notifications from './components/Notifications';
 import GroupDetails from './components/GroupDetails';
 
@@ -53,6 +54,7 @@ function MyRoutes() {
                 <Route index element={<Group />} />
                 <Route path="/join" element={<Join />}/>
                 <Route path="/notifications" element={<Notifications />} />
+                <Route path="/creategroup" element={<CreateGroup />} />
                 <Route path="/groupdetails/:groupid" element={<GroupDetails />}/>
               </Route>
             </Route>

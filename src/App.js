@@ -16,6 +16,7 @@ import Join from "./components/group/Join"
 import CreateGroup from './components/group/CreateGroup';
 import Notifications from './components/notif_request/Notifications';
 import GroupDetails from './components/group/GroupDetails';
+import GroupDetailsUpdate from './components/group/GroupDetailsUpdate';
 
 function MyRoutes() {
   const { route } = useAuthenticator((context) => [
@@ -54,6 +55,7 @@ function MyRoutes() {
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/creategroup" element={<CreateGroup />} />
                 <Route path="/groupdetails/:groupid" element={<GroupDetails />}/>
+                <Route path="/groupdetails/update/:groupid" element={<GroupDetailsUpdate />}/>
               </Route>
             </Route>
           </Routes>

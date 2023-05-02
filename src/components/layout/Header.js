@@ -60,7 +60,7 @@ const Header = ({ menuBtnRef, onOpen }) => {
 					<VStack spacing="2px" align='stretch'
 						display={{ base: "none", md: "block" }}
 					>
-						{/* <Text fontSize="md" fontWeight="bold" textAlign="center">{user.email.slice(0,8)}</Text> */}
+						{/* <Text fontSize="md" fontWeight="bold" textAlign="center">{user.name}</Text> */}
 						<Text fontSize="sm" textAlign="left">{user.email}</Text>
 					</VStack>
 				</HStack>

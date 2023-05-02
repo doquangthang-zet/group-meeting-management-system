@@ -14,7 +14,7 @@ import { GoListUnordered } from 'react-icons/go'
 import { FaChalkboardTeacher } from "react-icons/fa";
 import {GrGroup} from "react-icons/gr"
 import { useAuthenticator } from '@aws-amplify/ui-react-core';
-import Notifications from '../Notifications';
+import Notifications from '../notif_request/Notifications';
 
 
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../redux/slices/groupSlice'
-import { selectUser } from "../redux/slices/userSlice";
+import { selectUser } from "../../redux/slices/userSlice";
 import {
   Button,
   Box,
@@ -17,13 +16,15 @@ import {
   Th,
   Td,
   Flex,
+  Stack,
+  Skeleton,
 } from '@chakra-ui/react'
 import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
 import { useDisclosure } from "@chakra-ui/react";
 import CreateGroup from "./CreateGroup";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchGroupData, groupAPI, groupNUserAPI } from "../dynamoDB";
+import { fetchGroupData, groupAPI, groupNUserAPI } from "../../dynamoDB";
 import { useEffect, useState } from "react";
 
 const Group = () => {
@@ -38,6 +39,7 @@ const Group = () => {
     navigate('creategroup')
   }
   const [grpData, setGrpData] = useState([])
+  const [loading, setLoading] = useState(true)
   console.log(grpData)
 
   const navigateToGroupDetails = (groupid) => {
@@ -56,6 +58,7 @@ const Group = () => {
     } catch (e) {
       console.log(e)
     }
+    setLoading(false)
   }
   useEffect(() => {
     fetchGroupData()
@@ -90,22 +93,30 @@ const Group = () => {
             </Tr>
           </Thead>
           <Tbody>
-              {
-                grpData.map((group) =>(
-                  <Tr key= {group.id}>
-                    <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
-                    <Td>{group.date}</Td>
-                    <Td>{group.time}</Td>
-                    <Td>{group.location}</Td>
-                    <Td >
-                      <Button
-                        variant='ghost' colorScheme="red">
-                        Leave
-                      </Button>
-                    </Td>
-                  </Tr>
-                ))
-              }
+            {loading ?
+              <Tr>
+                <Td colSpan={10}>
+                  <Stack w='100'>
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                  </Stack>
+                </Td>
+              </Tr>
+              : grpData.map((group) => (
+                <Tr key={group.id}>
+                  <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
+                  <Td>{group.date}</Td>
+                  <Td>{group.time}</Td>
+                  <Td>{group.location}</Td>
+                  <Td ><Button
+                    variant='ghost' colorScheme="red">
+                    Leave
+                  </Button></Td>
+                </Tr>
+              ))
+            }
           </Tbody>
         </Table>
         <Flex w="100%" justify="space-between">

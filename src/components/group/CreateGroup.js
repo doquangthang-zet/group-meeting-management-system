@@ -8,12 +8,12 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createGroupAsync } from '../redux/slices/groupSlice';
-import { selectUser } from '../redux/slices/userSlice';
+import { createGroupAsync } from '../../redux/slices/groupSlice';
+import { selectUser } from '../../redux/slices/userSlice';
 import { nanoid } from '@reduxjs/toolkit';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+
 
 const STATUS_IDLE = 0
 const STATUS_CREATING = 1

@@ -18,31 +18,16 @@ import {
   Flex,
   Stack,
   Skeleton,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
 } from '@chakra-ui/react'
 import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchGroupData, groupAPI, groupNUserAPI } from "../../dynamoDB";
 import { useEffect, useState } from "react";
-import { deleteGroupNUserAsync, deleteForHostAsync } from "../../redux/slices/groupSlice";
-import { useDisclosure } from "@chakra-ui/react";
-import DeleteGroup from "../DeleteGroup";
+import DeleteGroupForHost from "./DeleteGroupForHost";
+import LeaveGroup from "./LeaveGroup";
 const Group = () => {
   const dispatch = useDispatch()
-  const {isOpen, onOpen, onClose} = useDisclosure()
   const { user } = useSelector(selectUser)
   const [grpDataTest, setGrpDataTest] = useState([])
   console.log("GRPDATATEST", grpDataTest)
@@ -98,9 +83,6 @@ const Group = () => {
     fetchGroupData()
   }, [])
 
-  const handleDelete = (id) => {
-    dispatch(deleteGroupNUserAsync(id))
-  }
 
   const handleDeleteforHost = async(id) => {
     console.log(id)
@@ -162,26 +144,9 @@ const Group = () => {
                   <Td>{group.time}</Td>
                   <Td>{group.location}</Td>
                   {user.sub == group.host ?
-                  <Td><DeleteGroup id={group.id}/></Td>
-                    : <Td ><Button
-                    variant='ghost' colorScheme="red" onClick={onOpen}>
-                    Leave
-                  </Button>
-                    <Modal isOpen={isOpen} onClose={onClose}>
-                      <ModalOverlay />
-                      <ModalContent>
-                        <ModalHeader>Leave?</ModalHeader>
-                        <ModalBody>Do you want to leave this group?</ModalBody>
-                        <ModalCloseButton />
-                        <ModalFooter>
-                          <Button colorScheme='blue' mr={3} onClick={onClose}>
-                            Close
-                          </Button>
-                          <Button variant='solid' colorScheme="red" id={group.id} onClick={()=>handleDeleteforHost(group.id)}>Delete</Button>
-                        </ModalFooter>
-                      </ModalContent>
-                    </Modal>
-                    </Td>  
+                  <Td><DeleteGroupForHost id={group.id}/></Td>
+                    : 
+                  <Td><LeaveGroup id={group.gnuid}/></Td>  
                   }
                 </Tr>
               ))

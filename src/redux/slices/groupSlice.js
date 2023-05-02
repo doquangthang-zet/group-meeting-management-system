@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import { createGroupNUser, createRequest } from "../../dynamoDB";
-import {createGroup} from "../../dynamoDB"
+import {createGroup, updateGroup} from "../../dynamoDB"
 import { deleteRequest } from "../../dynamoDB";
 
 export const GROUP_IDLE = 0
@@ -75,6 +75,19 @@ export const createGroupAsync = createAsyncThunk('group/createGroupAsync', async
     await createGroupNUser(groupNuserToJson)
 })
 
+export const updateGroupAsync = createAsyncThunk('groupDetails/updateGroupAsync', async(data) => {
+    const dataToJson = JSON.stringify({
+        id: data.groupID,
+        date: data.date,
+        groupname: data.groupName,
+        host: data.userID,
+        location: data.location,
+        time: data.time
+    })
+    // console.log(data.groupID)
+    // console.log(data.userID)
+    await updateGroup(dataToJson)
+})
 
 export const groupSlice = createSlice({
     name: 'group',

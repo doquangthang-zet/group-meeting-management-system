@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { json } from "react-router-dom";
-import {createGroup, createGroupNUser} from "../../dynamoDB"
+import {createGroup, createGroupNUser, updateGroup} from "../../dynamoDB"
 
 export const GROUP_IDLE = 0
 export const GROUP_CREATE_PENDING = 1
@@ -37,6 +37,21 @@ export const createGroupAsync = createAsyncThunk('group/createGroupAsync', async
     await createGroup(dataToJson)
     await createGroupNUser(groupNuserToJson)
 })
+
+export const updateGroupAsync = createAsyncThunk('groupDetails/updateGroupAsync', async(data) => {
+    const dataToJson = JSON.stringify({
+        id: data.groupID,
+        date: data.date,
+        groupname: data.groupName,
+        host: data.userID,
+        location: data.location,
+        time: data.time
+    })
+    // console.log(data.groupID)
+    // console.log(data.userID)
+    await updateGroup(dataToJson)
+})
+
 export const groupSlice = createSlice({
     name: 'group',
     initialState,

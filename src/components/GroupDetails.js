@@ -1,15 +1,25 @@
-import { Box, HStack, Heading, Icon, StackDivider, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack } from "@chakra-ui/react"
+import { Box, Button, Flex, HStack, Heading, Icon, StackDivider, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
-import { MdNotifications } from "react-icons/md"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getGroupbyId, getAllGroupNUser, getAllUser } from "../dynamoDB";
+import { GrUpdate } from "react-icons/gr";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../redux/slices/userSlice";
 
 
 const GroupDetails = () => {
+    const navigate = useNavigate();
     let params = useParams();
     const [currentGroup, setCurrentGroup] = useState([]);
     const [groups, setGroups] = useState([]);
     const [users, setUsers] = useState([]);
+
+    const { user } = useSelector(selectUser)
+    const dispatch = useDispatch();
+
+    const navigateToGroupUpdate = (groupid) => {
+        navigate(`/groupDetails/update/${groupid}`)
+    }
 
     useEffect(() => {
         getGroupbyId(params.groupid).then((res) => {
@@ -22,7 +32,7 @@ const GroupDetails = () => {
 
         getAllUser().then((res) => {
             setUsers(res)
-            console.log(res)
+            // console.log(res)
         })
     }, [])
 
@@ -116,6 +126,16 @@ const GroupDetails = () => {
                             </Table>
                         </TableContainer>
                     </VStack>
+                    
+                    {groups && groups.Items?.filter((g) => 
+                        g.groupid === params.groupid && g.userid === user.sub && g.role === "host"
+                    ).map((gr) => 
+                        <Flex w="100%" justify={{base: "center", md: "space-between"}}>
+                            <Button leftIcon={<GrUpdate />} onClick={() => navigateToGroupUpdate(currentGroup.Item.id)} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
+                                Update Group
+                            </Button>
+                        </Flex>
+                    )} 
                 </VStack>
             </VStack>
         </Box>

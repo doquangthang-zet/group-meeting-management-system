@@ -35,7 +35,7 @@ import {
 import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchGroupData, groupAPI, groupNUserAPI } from "../dynamoDB";
+import { fetchGroupData, groupAPI, groupNUserAPI } from "../../dynamoDB";
 import { useEffect, useState } from "react";
 import { deleteGroupNUserAsync, deleteForHostAsync } from "../redux/slices/groupSlice";
 import { useDisclosure } from "@chakra-ui/react";
@@ -55,6 +55,7 @@ const Group = () => {
   }
   const [grpData, setGrpData] = useState([])
   const [loading, setLoading] = useState(true)
+  console.log(grpData)
 
   const navigateToGroupDetails = (groupid) => {
     navigate(`/groupDetails/${groupid}`)

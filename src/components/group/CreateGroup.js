@@ -8,11 +8,12 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createGroupAsync } from '../redux/slices/groupSlice';
-import { selectUser } from '../redux/slices/userSlice';
+import { createGroupAsync } from '../../redux/slices/groupSlice';
+import { selectUser } from '../../redux/slices/userSlice';
 import { nanoid } from '@reduxjs/toolkit';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+
 
 const STATUS_IDLE = 0
 const STATUS_CREATING = 1
@@ -91,8 +92,6 @@ const CreateGroup = () => {
                 duration: 4000,
                 isClosable: true,
               })
-
-			navigate("/")
         } catch(e){
             toast({
                 title: "Unexpected Error",
@@ -106,7 +105,7 @@ const CreateGroup = () => {
         
   
     return(
-    <Box w='90%' mt='1em' p='1em' ml="auto" mr="auto" bg="whiteAlpha.700" borderRadius="1em">
+    <Box w='90%' mt='1em' p='1em' ml="auto" mr="auto" bg="white" borderRadius="1em">
         <Heading
         color="#A27083"
         textAlign="center"

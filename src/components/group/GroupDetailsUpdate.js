@@ -1,11 +1,11 @@
 import { Box, Button, Flex, HStack, Heading, Icon, Input, StackDivider, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack, useToast } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import { getGroupbyId, getAllGroupNUser, getAllUser, groupAPI, groupNUserAPI } from "../dynamoDB";
+import { getGroupbyId, getAllGroupNUser, getAllUser, groupAPI, groupNUserAPI } from "../../dynamoDB";
 import { GrUpdate } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../redux/slices/userSlice";
-import { updateGroupAsync } from "../redux/slices/groupSlice";
+import { selectUser } from "../../redux/slices/userSlice";
+import { updateGroupAsync } from "../../redux/slices/groupSlice";
 
 const STATUS_IDLE = 0
 const STATUS_CREATING = 1

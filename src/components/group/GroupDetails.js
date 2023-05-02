@@ -1,10 +1,10 @@
-import { Box, Button, Flex, HStack, Heading, Icon, StackDivider, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack } from "@chakra-ui/react"
+import { Box, Button, Flex, HStack, Heading, Icon, Skeleton, StackDivider, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import { getGroupbyId, getAllGroupNUser, getAllUser } from "../dynamoDB";
 import { GrUpdate } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../redux/slices/userSlice";
+import { selectUser } from "../../redux/slices/userSlice";
+import { getGroupbyId, getAllGroupNUser, getAllUser } from "../../dynamoDB";
 
 
 const GroupDetails = () => {
@@ -32,7 +32,6 @@ const GroupDetails = () => {
 
         getAllUser().then((res) => {
             setUsers(res)
-            // console.log(res)
         })
     }, [])
 
@@ -130,7 +129,7 @@ const GroupDetails = () => {
                     {groups && groups.Items?.filter((g) => 
                         g.groupid === params.groupid && g.userid === user.sub && g.role === "host"
                     ).map((gr) => 
-                        <Flex w="100%" justify={{base: "center", md: "space-between"}}>
+                        <Flex key={gr.id} w="100%" justify={{base: "center", md: "space-between"}}>
                             <Button leftIcon={<GrUpdate />} onClick={() => navigateToGroupUpdate(currentGroup.Item.id)} boxShadow="2xl" bg="whiteAlpha.900" variant='solid' color="#A27083">
                                 Update Group
                             </Button>

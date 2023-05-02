@@ -31,6 +31,14 @@ const CreateGroup = () => {
     const toast = useToast()
     const navigate = useNavigate()
 
+    const formatDate = () => {
+        const splitted_date = date.split("-")
+        const joined_date = splitted_date[2] + "/" + splitted_date[1] + "/" + splitted_date[0]
+        return joined_date
+    }
+
+    const formated_date = formatDate();
+
     const handleAdd = async() => {
         if(name === ""){
             toast({
@@ -74,7 +82,7 @@ const CreateGroup = () => {
         }
         try{
             setStatus(STATUS_CREATING)
-            dispatch(createGroupAsync({groupID, date, name, userID, location, time, groupNuserID}))
+            dispatch(createGroupAsync({groupID, formated_date, name, userID, location, time, groupNuserID}))
             setStatus(STATUS_IDLE)
             toast({
                 title: "Success",

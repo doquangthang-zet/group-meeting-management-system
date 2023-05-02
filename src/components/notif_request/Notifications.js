@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardBody, Text, CardHeader, Heading, IconButton, VStack, Box, Spinner, Center, useToast, Alert, Divider, Flex } from "@chakra-ui/react"
 import { BsCheck2 } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
-import { createGroupNUser, getGroupbyId, getUserbyId, notifAPI, updateRequest } from '../../dynamoDB';
+import { createGroupNUser, deleteRequest, getGroupbyId, getUserbyId, notifAPI, updateRequest } from '../../dynamoDB';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/slices/userSlice';
 import { useEffect } from 'react';
@@ -141,6 +141,10 @@ const Notifications = () => {
         }
     }, [status])
 
+    const handleDelete = (id) => {
+        dispatch(deleteRequestAsync(id))
+    }
+
 
     //Handle change status (Data = status + notifData)
     const handleChange = async (data) => {
@@ -168,13 +172,14 @@ const Notifications = () => {
                 }
                 dispatch(addMemberToGroupAsync(addMemberInfo))
             } else if (data.status === STATUS_REJECTED) {
-                console.log(id)
-                dispatch(deleteRequestAsync(id))
+                handleDelete(id)
+                // deleteRequest(id)
             }
         } catch (e) {
             errorMessage(e.message)
         }
     }
+
 
     return (
         <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto">

@@ -50,7 +50,7 @@ export const addMemberToGroupAsync = createAsyncThunk('group/addMemberToGroupAsy
 })
 
 export const deleteRequestAsync = createAsyncThunk('group/deleteRequestAsync', async(id) => {
-    await deleteRequest(id)
+    deleteRequest(id)
 })
 
 

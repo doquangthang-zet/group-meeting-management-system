@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { selectUser } from "../redux/slices/userSlice";
+import { selectUser } from "../../redux/slices/userSlice";
 import {
   Button,
   Box,
@@ -37,9 +37,9 @@ import { MdGroupAdd } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchGroupData, groupAPI, groupNUserAPI } from "../../dynamoDB";
 import { useEffect, useState } from "react";
-import { deleteGroupNUserAsync, deleteForHostAsync } from "../redux/slices/groupSlice";
+import { deleteGroupNUserAsync, deleteForHostAsync } from "../../redux/slices/groupSlice";
 import { useDisclosure } from "@chakra-ui/react";
-import DeleteGroup from "./DeleteGroup";
+import DeleteGroup from "../DeleteGroup";
 const Group = () => {
   const dispatch = useDispatch()
   const {isOpen, onOpen, onClose} = useDisclosure()
@@ -162,7 +162,7 @@ const Group = () => {
                   <Td>{group.time}</Td>
                   <Td>{group.location}</Td>
                   {user.sub == group.host ?
-                  <Td>{group.id}</Td>
+                  <Td><DeleteGroup id={group.id}/></Td>
                     : <Td ><Button
                     variant='ghost' colorScheme="red" onClick={onOpen}>
                     Leave
@@ -181,7 +181,7 @@ const Group = () => {
                         </ModalFooter>
                       </ModalContent>
                     </Modal>
-                    </Td> 
+                    </Td>  
                   }
                 </Tr>
               ))

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import { json } from "react-router-dom";
-import {createGroup, createGroupNUser, deleteGroupNUser, deleteGroup, deleteRequest, createGroupNUser, createRequest} from "../../dynamoDB"
+import {createGroup, deleteGroupNUser, deleteGroup, deleteRequest, createGroupNUser, createRequest} from "../../dynamoDB"
 
 export const GROUP_IDLE = 0
 export const GROUP_REQUEST_PENDING = 1

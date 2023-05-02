@@ -12,8 +12,12 @@ import { useDisclosure } from '@chakra-ui/react'
 
 const DeleteGroup = (props) => {
     const {isOpen, onOpen, onClose} = useDisclosure()
-    console.log(props)
+    const display = (id) => {
+      console.log("ID", id)
+    }
     return(
+      <>
+    <Button onClick={onOpen}>Open Modal</Button>
     <Modal isOpen={isOpen} onClose={onClose}>
     <ModalOverlay />
     <ModalContent>
@@ -25,10 +29,11 @@ const DeleteGroup = (props) => {
         <Button colorScheme='blue' mr={3} onClick={onClose}>
           Close
         </Button>
-        <Button variant='solid' colorScheme="red">Delete</Button>
+        <Button variant='solid' colorScheme="red" onClick={() => {display(props)}}>Delete</Button>
       </ModalFooter>
     </ModalContent>
   </Modal>
+  </>
     )
 }
 

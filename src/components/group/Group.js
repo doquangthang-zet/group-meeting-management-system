@@ -18,6 +18,7 @@ import {
   Flex,
   Stack,
   Skeleton,
+  Text,
 } from '@chakra-ui/react'
 import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
@@ -30,6 +31,9 @@ import { useEffect, useState } from "react";
 const Group = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user } = useSelector(selectUser)
+  const [grpDataTest, setGrpDataTest] = useState([])
+  console.log("GRPDATATEST", grpDataTest)
+  grpDataTest.map((item) => console.log(item))
   // console.log(user)
   const navigate = useNavigate();
   const navigateToJoin = () => {
@@ -49,12 +53,31 @@ const Group = () => {
     const response = await fetch(groupAPI)
     const currentResponse = await fetch(groupNUserAPI)
     try {
+      const newResult = []
       const responseJson = await response.json()
       const currentJson = await currentResponse.json()
       const newCurrent = currentJson.Items.filter((item) => item.userid === user.sub).map(value => value.groupid)
+      const newCurrentTest = currentJson.Items.filter((item) => item.userid === user.sub)
       const result = responseJson.Items.filter((item) => newCurrent.includes(item.id))
-      console.log(newCurrent)
+      
+      for(let i = 0; i< result.length; i++){
+        let ovrData = {}
+        for(let j =0 ; j< newCurrentTest.length; j++){
+          if(newCurrentTest[j].groupid === result[i].id){
+            ovrData = {
+              ...result[i],
+              gnuid: newCurrentTest[j].id
+            }
+            console.log(ovrData)
+          }
+        }
+        newResult.push(ovrData)
+      }
+      console.log("current", newCurrentTest)
+      console.log("newReust", newResult)
+      
       setGrpData(result)
+      setGrpDataTest(newResult)
     } catch (e) {
       console.log(e)
     }
@@ -63,6 +86,10 @@ const Group = () => {
   useEffect(() => {
     fetchGroupData()
   }, [])
+
+  const handleDelete = (id) => {
+    console.log(id)
+  }
 
   return (
     <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto">
@@ -82,14 +109,14 @@ const Group = () => {
           />
           <Input placeholder='Search...' />
         </InputGroup>
-        <Table variant='simple' size="lg">
+        <Table variant='simple' size="lg" bg='white'>
           <Thead bg="#A27083">
             <Tr>
-              <Th color="white">Name</Th>
-              <Th color="white">Date</Th>
-              <Th color="white">Time</Th>
-              <Th color="white">Location</Th>
-              <Th color="white">Action</Th>
+              <Th textAlign="center" color="white">Name</Th>
+              <Th textAlign="center" color="white">Date</Th>
+              <Th textAlign="center" color="white">Time</Th>
+              <Th textAlign="center" color="white">Location</Th>
+              <Th textAlign="center" color="white">Action</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -104,14 +131,14 @@ const Group = () => {
                   </Stack>
                 </Td>
               </Tr>
-              : grpData.map((group) => (
-                <Tr key={group.id}>
-                  <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
-                  <Td>{group.date}</Td>
-                  <Td>{group.time}</Td>
+              : grpDataTest.map((group) => (
+                <Tr key={group.gnuid}>
+                  <Td textDecoration='underline' color= "#A27083" textAlign="center" _hover={{cursor: "pointer"}} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
+                  <Td textAlign="center" p='0'>{group.date}</Td>
+                  <Td  textAlign="center" p='0'>{group.time}</Td>
                   <Td>{group.location}</Td>
-                  <Td ><Button
-                    variant='ghost' colorScheme="red">
+                  <Td textAlign="center" ><Button
+                    variant='ghost' colorScheme="red" onClick={() => handleDelete(group.gnuid)}>
                     Leave
                   </Button></Td>
                 </Tr>

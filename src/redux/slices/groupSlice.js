@@ -38,19 +38,18 @@ export const createGroupRequestAsync = createAsyncThunk('group/createGroupReques
     await createRequest(final_requestInfo)
 })
 
-export const addMemberToGroupAsync = createAsyncThunk('group/addMemberToGroupAsync', async(data) => {
+export const addMemberToGroupAsync = createAsyncThunk('group/addMemberToGroupAsync', async(data,id) => {
     const hash = nanoid()
     const memberInfo = {
         "id" : hash,
         ...data
     }
     const fMemberInfo = JSON.stringify(memberInfo)
-
     await createGroupNUser(fMemberInfo)
 })
 
 export const deleteRequestAsync = createAsyncThunk('group/deleteRequestAsync', async(id) => {
-    await deleteRequest(id)
+    deleteRequest(id)
 })
 
 

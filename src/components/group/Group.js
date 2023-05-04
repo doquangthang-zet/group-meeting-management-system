@@ -18,6 +18,7 @@ import {
   Flex,
   Stack,
   Skeleton,
+  Text,
 } from '@chakra-ui/react'
 import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
@@ -108,14 +109,14 @@ const Group = () => {
           />
           <Input placeholder='Search...' />
         </InputGroup>
-        <Table variant='simple' size="lg">
+        <Table variant='simple' size="lg" bg='white'>
           <Thead bg="#A27083">
             <Tr>
-              <Th color="white">Name</Th>
-              <Th color="white">Date</Th>
-              <Th color="white">Time</Th>
-              <Th color="white">Location</Th>
-              <Th color="white">Action</Th>
+              <Th textAlign="center" color="white">Name</Th>
+              <Th textAlign="center" color="white">Date</Th>
+              <Th textAlign="center" color="white">Time</Th>
+              <Th textAlign="center" color="white">Location</Th>
+              <Th textAlign="center" color="white">Action</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -132,11 +133,11 @@ const Group = () => {
               </Tr>
               : grpDataTest.map((group) => (
                 <Tr key={group.gnuid}>
-                  <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
-                  <Td>{group.date}</Td>
-                  <Td>{group.time}</Td>
+                  <Td textDecoration='underline' color= "#A27083" textAlign="center" _hover={{cursor: "pointer"}} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
+                  <Td textAlign="center" p='0'>{group.date}</Td>
+                  <Td  textAlign="center" p='0'>{group.time}</Td>
                   <Td>{group.location}</Td>
-                  <Td ><Button
+                  <Td textAlign="center" ><Button
                     variant='ghost' colorScheme="red" onClick={() => handleDelete(group.gnuid)}>
                     Leave
                   </Button></Td>

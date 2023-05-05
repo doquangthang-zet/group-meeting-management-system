@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
 	Link
 } from "react-router-dom";
@@ -14,12 +14,13 @@ import logo from "../../images/rmit_logo.svg"
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/slices/userSlice';
+import { getUserbyId } from '../../dynamoDB';
 
 
 const Header = ({ menuBtnRef, onOpen }) => {
 	const { route } = useAuthenticator((context) => [context.route]);
 	const {user} = useSelector(selectUser)
-
+	
 	return (
 		<Box
 			bg="#A27083"
@@ -60,7 +61,7 @@ const Header = ({ menuBtnRef, onOpen }) => {
 					<VStack spacing="2px" align='stretch'
 						display={{ base: "none", md: "block" }}
 					>
-						{/* <Text fontSize="md" fontWeight="bold" textAlign="center">{user.name}</Text> */}
+						
 						<Text fontSize="sm" textAlign="left">{user.email}</Text>
 					</VStack>
 				</HStack>

@@ -18,6 +18,7 @@ import {
   Flex,
   Stack,
   Skeleton,
+  Text,
 } from '@chakra-ui/react'
 import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
@@ -31,6 +32,8 @@ const Group = () => {
   const { user } = useSelector(selectUser)
   const [grpDataTest, setGrpDataTest] = useState([])
   console.log("GRPDATATEST", grpDataTest)
+  grpDataTest.map((item) => console.log(item))
+  // console.log(user)
   const navigate = useNavigate();
   const navigateToJoin = () => {
     navigate('/join')
@@ -84,18 +87,6 @@ const Group = () => {
   }, [])
 
 
-  const handleDeleteforHost = async(id) => {
-    console.log(id)
-    // const data = await fetch(groupNUserAPI)
-    // const list = []
-    // const dataJson = await data.json()
-    // const result = dataJson.Items.filter((item) => item.groupid == id)
-    // result.forEach(element => {
-    //     list.push(element.id)
-    // });
-    // console.log(list)
-    // dispatch(deleteForHostAsync({id, list}))
-  }
 
   return (
     <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto">
@@ -115,14 +106,14 @@ const Group = () => {
           />
           <Input placeholder='Search...' />
         </InputGroup>
-        <Table variant='simple' size="lg">
+        <Table variant='simple' size="lg" bg='white'>
           <Thead bg="#A27083">
             <Tr>
-              <Th color="white">Name</Th>
-              <Th color="white">Date</Th>
-              <Th color="white">Time</Th>
-              <Th color="white">Location</Th>
-              <Th color="white">Action</Th>
+              <Th textAlign="center" color="white">Name</Th>
+              <Th textAlign="center" color="white">Date</Th>
+              <Th textAlign="center" color="white">Time</Th>
+              <Th textAlign="center" color="white">Location</Th>
+              <Th textAlign="center" color="white">Action</Th>
             </Tr>
           </Thead>
           <Tbody>

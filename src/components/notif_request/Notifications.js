@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardBody, Text, CardHeader, Heading, IconButton, VStack, Box, Spinner, Center, useToast, Alert, Divider, Flex } from "@chakra-ui/react"
 import { BsCheck2 } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
-import { createGroupNUser, getGroupbyId, getUserbyId, notifAPI, updateRequest } from '../../dynamoDB';
+import { createGroupNUser, deleteRequest, getGroupbyId, getUserbyId, notifAPI, updateRequest } from '../../dynamoDB';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/slices/userSlice';
 import { useEffect } from 'react';
@@ -22,6 +22,7 @@ const Notifications = () => {
     const [userDict, setUserDict] = useState({})
     const [groupDict, setGroupDict] = useState({})
     const [loading, setLoading] = useState(true)
+    const [selectedIndex, setSelectedIndex] = useState([])
     const toast = useToast()
 
     // Get request infos
@@ -138,43 +139,57 @@ const Notifications = () => {
                 duration: 4000,
                 isClosable: true,
             })
+            dispatch(changeGroupStatus(GROUP_IDLE))
         }
     }, [status])
 
+    
+    
 
     //Handle change status (Data = status + notifData)
     const handleChange = async (data) => {
         const { id, groupid, receiverid, senderid } = data.data;
-        try {
-            //update request status
-            const newRequestInfo = {
-                id: id,
-                groupid: groupid,
-                receiverid: receiverid,
-                senderid: senderid,
-                status: data.status
+        setSelectedIndex(prev => {
+            const isInclude = selectedIndex.includes(data.index)
+            if (isInclude) {
+                return selectedIndex.filter(item => item !== data.index)
+            } else {
+                return [...prev, data.index]
             }
-            const fRequestInfo = JSON.stringify(newRequestInfo)
+        })
+        try {
+            // //update request status
+            // const newRequestInfo = {
+            //     id: id,
+            //     groupid: groupid,
+            //     receiverid: receiverid,
+            //     senderid: senderid,
+            //     status: data.status
+            // }
+            // const fRequestInfo = JSON.stringify(newRequestInfo)
 
-            updateRequest(fRequestInfo)
-
-
+            // updateRequest(fRequestInfo)
+            //Delete the pending request
+            deleteRequest(id)
+            
             //Add user to group
-            if (data.status === STATUS_ACCEPTED) {
+            if (data.status === STATUS_ACCEPTED){
                 const addMemberInfo = {
                     groupid: groupid,
                     role: "member",
                     userid: senderid
                 }
-                dispatch(addMemberToGroupAsync(addMemberInfo))
-            } else if (data.status === STATUS_REJECTED) {
-                console.log(id)
-                dispatch(deleteRequestAsync(id))
+                dispatch(addMemberToGroupAsync(addMemberInfo, id))
+                // deleteRequest(id)
+            }else if (data.status === STATUS_REJECTED) {
+                // deleteRequest(id)
+                dispatch(changeGroupStatus(GROUP_DELETE_REQUEST_SUCCESS))
             }
         } catch (e) {
             errorMessage(e.message)
         }
     }
+
 
     return (
         <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto">
@@ -196,19 +211,31 @@ const Notifications = () => {
                     />
                 </Center> :
                 requestData.length === 0 ? <Flex w='100' mt='10'><Text>There is no notifications now</Text></Flex>
-                :requestData.map((item, index) => (
-                    <Card key={index} m="2em" borderRadius='2xl' size="md" boxShadow='md' p='6' rounded='sm' >
-                        <CardHeader>
-                            <Heading size="sm" ml="0.5em">{item.senderName}</Heading>
-                        </CardHeader>
-                        <CardBody mt="-1em">
-                            <Text ml="0.5em">{item.senderEmail} wanted to join your group {item.groupname}!
-                                <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose size="2em" color="#E48181" />} onClick={() => handleChange({ status: STATUS_REJECTED, data: item })} />
-                                <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right" size="2em" color="#306643" />} onClick={() => handleChange({ status: STATUS_ACCEPTED, data: item })} />
-                            </Text>
-                        </CardBody>
-                    </Card>
-                ))
+                    : requestData.map((item, index) => (
+                        !selectedIndex.includes(index) ?
+                            <Card key={index} m="2em" borderRadius='md' size="sm" boxShadow='md' p='6' rounded='sm' >
+                                <CardHeader>
+                                    <Heading size="md" ml="0.5em">{item.groupname}</Heading>
+                                </CardHeader>
+                                <CardBody mt="-0.25">
+                                    <Text ml="0.5em">{item.senderName} wanted to join your group!
+                                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose size="2em" color="#E48181" />} onClick={() => handleChange({ status: STATUS_REJECTED, data: item, index: index })} />
+                                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right" size="2em" color="#306643" />} onClick={() => handleChange({ status: STATUS_ACCEPTED, data: item, index: index })} />
+                                    </Text>
+                                </CardBody>
+                            </Card>
+                            :
+                            <Card key={index} m="2em" borderRadius='2xl' size="md" boxShadow='md' p='6' rounded='sm' >
+                                <CardHeader>
+                                    <Heading size="sm" ml="0.5em">{item.senderName}</Heading>
+                                </CardHeader>
+                                <CardBody mt="-0.25">
+                                    <Text ml="0.5em">{item.senderEmail} request to join {item.groupname} has been resolved
+                                    </Text>
+                                </CardBody>
+                            </Card>
+
+                    ))
             }
         </Box>
     );

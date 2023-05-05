@@ -21,7 +21,7 @@ const LeaveGroup = (props) => {
     }
     return(
       <>
-    <Button onClick={onOpen}>Leave</Button>
+    <Button variant="ghost" colorScheme="red" onClick={onOpen}>Leave</Button>
     <Modal isOpen={isOpen} onClose={onClose}>
     <ModalOverlay />
     <ModalContent>

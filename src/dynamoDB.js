@@ -143,6 +143,17 @@ const getAllUser = () => {
         return resp
     })
 }
+
+const updateUser = async (data) => {
+    fetch(userAPI, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    })
+}
 export {
     createGroup,
     updateGroup,
@@ -156,4 +167,5 @@ export {
     getUserbyId,
     getAllGroupNUser,
     getAllUser,
+    updateUser,
 }

@@ -9,6 +9,7 @@ import {
 	MdOutlineSettings,
     MdNotificationsNone,
 	MdLogout,
+	MdSettings
 } from "react-icons/md";
 import { GoListUnordered } from 'react-icons/go'
 import { FaChalkboardTeacher } from "react-icons/fa";
@@ -51,6 +52,17 @@ const NavbarInner = ({ display, mr, mt }) => {
 				>
 					<TagLeftIcon boxSize='20px' as={MdNotificationsNone} />
 					<TagLabel fontWeight="bold">Notifications</TagLabel>
+				</Tag>
+			</NavLink>
+			<NavLink to="/profile" className="full-width not-active">
+				<Tag bg="inherit" color="inherit"
+					p="15px"
+					w="100%"
+					textAlign="left"
+					borderRadius="10px"
+				>
+					<TagLeftIcon boxSize='20px' as={MdSettings} />
+					<TagLabel fontWeight="bold">Setting</TagLabel>
 				</Tag>
 			</NavLink>
 			

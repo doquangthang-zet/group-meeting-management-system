@@ -22,14 +22,13 @@ import {
 } from '@chakra-ui/react'
 import { HiOutlineUserGroup, HiOutlineSearch } from "react-icons/hi";
 import { MdGroupAdd } from "react-icons/md";
-import { useDisclosure } from "@chakra-ui/react";
-import CreateGroup from "./CreateGroup";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchGroupData, groupAPI, groupNUserAPI } from "../../dynamoDB";
 import { useEffect, useState } from "react";
-
+import DeleteGroupForHost from "./DeleteGroupForHost";
+import LeaveGroup from "./LeaveGroup";
 const Group = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const dispatch = useDispatch()
   const { user } = useSelector(selectUser)
   const [grpDataTest, setGrpDataTest] = useState([])
   console.log("GRPDATATEST", grpDataTest)
@@ -87,9 +86,7 @@ const Group = () => {
     fetchGroupData()
   }, [])
 
-  const handleDelete = (id) => {
-    console.log(id)
-  }
+
 
   return (
     <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto">
@@ -133,14 +130,15 @@ const Group = () => {
               </Tr>
               : grpDataTest.map((group) => (
                 <Tr key={group.gnuid}>
-                  <Td textDecoration='underline' color= "#A27083" textAlign="center" _hover={{cursor: "pointer"}} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
-                  <Td textAlign="center" p='0'>{group.date}</Td>
-                  <Td  textAlign="center" p='0'>{group.time}</Td>
+                  <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
+                  <Td>{group.date}</Td>
+                  <Td>{group.time}</Td>
                   <Td>{group.location}</Td>
-                  <Td textAlign="center" ><Button
-                    variant='ghost' colorScheme="red" onClick={() => handleDelete(group.gnuid)}>
-                    Leave
-                  </Button></Td>
+                  {user.sub == group.host ?
+                  <Td><DeleteGroupForHost id={group.id}/></Td>
+                    : 
+                  <Td><LeaveGroup id={group.gnuid}/></Td>  
+                  }
                 </Tr>
               ))
             }

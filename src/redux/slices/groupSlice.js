@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { createGroupNUser, createRequest } from "../../dynamoDB";
-import {createGroup, updateGroup} from "../../dynamoDB"
-import { deleteRequest } from "../../dynamoDB";
+import { json } from "react-router-dom";
+import {createGroup, deleteGroupNUser, deleteGroup, deleteRequest, createGroupNUser, createRequest, updateGroup} from "../../dynamoDB"
 
 export const GROUP_IDLE = 0
 export const GROUP_REQUEST_PENDING = 1
@@ -56,7 +55,7 @@ export const deleteRequestAsync = createAsyncThunk('group/deleteRequestAsync', a
 export const createGroupAsync = createAsyncThunk('group/createGroupAsync', async(data) => {
     const dataToJson = JSON.stringify({
         id: data.groupID,
-        date: data.date,
+        date: data.formated_date,
         groupname: data.name,
         host: data.userID,
         location: data.location,
@@ -74,6 +73,11 @@ export const createGroupAsync = createAsyncThunk('group/createGroupAsync', async
     await createGroupNUser(groupNuserToJson)
 })
 
+export const deleteGroupNUserAsync = createAsyncThunk('group/deleteGroupNUserAsync', async(data) => {
+    deleteGroupNUser(data)
+    return data
+})
+
 export const updateGroupAsync = createAsyncThunk('groupDetails/updateGroupAsync', async(data) => {
     const dataToJson = JSON.stringify({
         id: data.groupID,
@@ -88,6 +92,14 @@ export const updateGroupAsync = createAsyncThunk('groupDetails/updateGroupAsync'
     await updateGroup(dataToJson)
 })
 
+export const deleteForHostAsync = createAsyncThunk('group/deleteForHostAsync', async(data) => {
+    console.log(data)
+    deleteGroup(data.id)
+    data.list.forEach(id => {
+        deleteGroupNUser(id)
+    });
+    return data
+})
 export const groupSlice = createSlice({
     name: 'group',
     initialState,

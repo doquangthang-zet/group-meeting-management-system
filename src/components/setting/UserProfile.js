@@ -20,7 +20,7 @@ const UserProfile = () => {
         <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto">
             <Flex w='100%' mt='1em' ml="auto" mr="auto" alignItems='center' gap='2' bg='red'>
                 <Box p='2'>
-                    <Heading color='#A27083' size='md'>User Info</Heading>
+                    <Heading color='#A27083' size='lg'>User Info</Heading>
                 </Box>
                 <Spacer/>
                 <ButtonGroup gap='2'>
@@ -28,7 +28,7 @@ const UserProfile = () => {
                 </ButtonGroup>
             </Flex>
             <Center w='100%' alignItems='left' ml="auto" mr="auto">
-                <HStack w='100%' gap={10} mt='5rem' bg='white'>
+                <HStack w='100%' gap={10} mt='3rem' bg='white'>
                     <VStack w='40%' alignContent='left'>
                         <HStack gap='10px' p='0.75em' alignContent='center'>
                             <Avatar
@@ -44,7 +44,7 @@ const UserProfile = () => {
                             </VStack>
                         </HStack>
                     </VStack>
-                    <VStack w='60%' gap={10} pt='20px' pd='20px'>
+                    <VStack w='60%' gap={10} p='2rem'>
                         <HStack w='100%' alignItems='center'>
                             <Text as='b' textColor='#11142D' fontSize='15px' w='20%'>Email</Text>
                             <Text borderRadius='5px' borderColor='gray.400'>{userData.useremail}</Text>

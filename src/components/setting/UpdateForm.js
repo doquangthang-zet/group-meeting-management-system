@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, AccordionPanel, Button, Center, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, VStack, useDisclosure, Box, AccordionButton, AccordionIcon, Textarea, useToast, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import { Accordion, AccordionItem, AccordionPanel, Button, Center, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, VStack, useDisclosure, Box, AccordionButton, AccordionIcon, Textarea, useToast, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getUserbyId, updateUser, userAPI } from "../../dynamoDB";
 import { useDispatch, useSelector } from "react-redux";
@@ -210,13 +210,15 @@ const UpdateForm = () => {
 							</AccordionPanel>
 						</AccordionItem>
 					</Accordion>
-					<Button
-						colorScheme="blue"
-						mr={3}
-						onClick={handleUpdate}
-					>
-						Save
-					</Button>
+					<Flex justify={"flex-end"} w='100%' mt='2rem'>
+						<Button
+							bg='#A27083'
+							color='white'
+							onClick={handleUpdate}
+						>
+							Save
+						</Button>
+					</Flex>
 				</VStack>
 			</VStack>
 		</Center>

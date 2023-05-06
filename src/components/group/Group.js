@@ -31,9 +31,10 @@ const Group = () => {
   const dispatch = useDispatch()
   const { user } = useSelector(selectUser)
   const [grpDataTest, setGrpDataTest] = useState([])
-  console.log("GRPDATATEST", grpDataTest)
+  const [searchFilter, setSearchFilter] = useState('')
+  // console.log("GRPDATATEST", grpDataTest)
   grpDataTest.map((item) => console.log(item))
-  // console.log(user)
+  // console.log(searchFilter)
   const navigate = useNavigate();
   const navigateToJoin = () => {
     navigate('/join')
@@ -43,7 +44,7 @@ const Group = () => {
   }
   const [grpData, setGrpData] = useState([])
   const [loading, setLoading] = useState(true)
-  console.log(grpData)
+  // console.log(grpData)
 
   const navigateToGroupDetails = (groupid) => {
     navigate(`/groupDetails/${groupid}`)
@@ -104,7 +105,7 @@ const Group = () => {
             pointerEvents='none'
             children={<HiOutlineSearch color='gray.300' />}
           />
-          <Input placeholder='Search...' />
+          <Input placeholder='Search...' onChange={(e) => setSearchFilter(e.target.value)} />
         </InputGroup>
         <Table variant='simple' size="lg" bg='white'>
           <Thead bg="#A27083">
@@ -128,7 +129,11 @@ const Group = () => {
                   </Stack>
                 </Td>
               </Tr>
-              : grpDataTest.map((group) => (
+              : grpDataTest.filter((g) => {
+                return searchFilter.toLowerCase() === '' 
+                  ? g 
+                  : g.groupname.toLowerCase().includes(searchFilter)
+              }).map((group) => (
                 <Tr key={group.gnuid}>
                   <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
                   <Td>{group.date}</Td>

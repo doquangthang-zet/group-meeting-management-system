@@ -11,6 +11,7 @@ import { I18n } from 'aws-amplify';
 
 export function Login() {
   const { tokens } = useTheme();
+  
   const theme = {
     name: 'Auth Example Theme',
     tokens: {
@@ -98,7 +99,7 @@ export function Login() {
   return (
     <View className="auth-wrapper">
        <ThemeProvider theme={theme}>
-        <Authenticator formFields={formFields} signUpAttributes={['name']}></Authenticator>
+        <Authenticator formFields={formFields} signUpAttributes={['name','phone_number']}></Authenticator>
        </ThemeProvider>
     </View>
   );

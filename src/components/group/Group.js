@@ -132,7 +132,7 @@ const Group = () => {
               : grpDataTest.filter((g) => {
                 return searchFilter.toLowerCase() === '' 
                   ? g 
-                  : g.groupname.toLowerCase().includes(searchFilter)
+                  : g.groupname.toLowerCase().includes(searchFilter.toLowerCase())
               }).map((group) => (
                 <Tr key={group.gnuid}>
                   <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>

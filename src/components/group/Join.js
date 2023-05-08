@@ -40,9 +40,11 @@ const Join = () => {
   const { status } = useSelector(selectGroup)
   const [loading, setLoading] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState([])
+  const [searchFilter, setSearchFilter] = useState("")
   const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
+  console.log(searchFilter)
 
   const fetchGroupData = async () => {
     const response = await fetch(groupAPI)
@@ -120,7 +122,7 @@ const Join = () => {
             pointerEvents='none'
             children={<HiOutlineSearch color='gray.300' />}
           />
-          <Input placeholder='Search...' />
+          <Input placeholder='Search...' onChange={(e) => setSearchFilter(e.target.value)}/>
         </InputGroup>
         <Table variant='simple' size="lg">
           <Thead bg="#A27083">
@@ -146,7 +148,11 @@ const Join = () => {
               </Td>
             </Tr>
               :
-              grpData.map((item, index) => (
+              grpData.filter((g) => {
+                return searchFilter.toLowerCase === ""
+                ? g
+                :g.groupname.toLowerCase().includes(searchFilter.toLowerCase())
+              }).map((item, index) => (
                 <Tr key={index}>
                   <Td textAlign="center">{item.groupname}</Td>
                   {/* <Td textAlign="center">3</Td> */}

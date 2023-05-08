@@ -60,25 +60,25 @@ const UserProfile = () => {
                     </VStack>
                     <VStack w='60%' gap={10} p='2rem'>
                         <HStack w='100%' alignItems='center'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'>Email</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'>Email</Text>
                             <Text borderRadius='5px' borderColor='gray.400'>{userData.useremail}</Text>
                         </HStack >
                         <HStack w='100%' alignItems='center'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'> Phone Number</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'> Phone Number</Text>
                             <Text borderRadius='5px' borderColor='gray.400'>{userData.phone_number}</Text>
                         </HStack >
                         <HStack w='100%' alignItems='center'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'> UserName</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'> UserName</Text>
                             <Text borderRadius='5px' borderColor='gray.400'>{userData.username}</Text>
                         </HStack >
                         <HStack w='100%' alignItems='center'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'>Gender</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'>Gender</Text>
 
                             <Text borderRadius='5px' borderColor='gray.400' >{userData.gender?.length == 0 ? 'N/A' : userData.gender}</Text>
 
                         </HStack >
                         <HStack w='100%' alignItems='left'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'>Description</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'>Description</Text>
                             <Text borderRadius='5px' borderColor='gray.400' h="100%" >{userData.description?.length == 0 ? 'N/A' : userData.description}</Text>
                         </HStack >
                     </VStack>

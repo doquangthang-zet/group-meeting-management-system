@@ -135,14 +135,14 @@ const Group = () => {
                   : g.groupname.toLowerCase().includes(searchFilter.toLowerCase())
               }).map((group) => (
                 <Tr key={group.gnuid}>
-                  <Td _hover={{ color: "#A27083", fontWeight: "bold", cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
-                  <Td>{group.date}</Td>
-                  <Td>{group.time}</Td>
+                  <Td textAlign="center" textDecoration='underline' color= "#A27083" _hover={{ cursor: "pointer" }} onClick={() => navigateToGroupDetails(group.id)}><Link to={`/groupDetails/${group.id}`}>{group.groupname}</Link></Td>
+                  <Td textAlign="center">{group.date}</Td>
+                  <Td textAlign="center">{group.time}</Td>
                   <Td>{group.location}</Td>
                   {user.sub == group.host ?
-                  <Td><DeleteGroupForHost id={group.id}/></Td>
+                  <Td textAlign="center"><DeleteGroupForHost id={group.id}/></Td>
                     : 
-                  <Td><LeaveGroup id={group.gnuid}/></Td>  
+                  <Td textAlign="center"><LeaveGroup id={group.gnuid}/></Td>  
                   }
                 </Tr>
               ))

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { selectUser } from "../../redux/slices/userSlice"
 import { getUserbyId } from "../../dynamoDB"
-import { Avatar, Box, Button, ButtonGroup, Center, GridItem, HStack, Heading, Spacer, Text, Textarea, VStack } from "@chakra-ui/react"
+import { Avatar, Box, Button, ButtonGroup, Center, GridItem, HStack, Heading, Skeleton, Spacer, Stack, Text, Textarea, VStack } from "@chakra-ui/react"
 import { Flex, Grid } from "@aws-amplify/ui-react"
 import UpdateForm from "./UpdateForm"
 import { Link } from "react-router-dom"
@@ -11,9 +11,13 @@ const UserProfile = () => {
     const [userData, setUserData] = useState({})
     console.log(userData)
     const { user } = useSelector(selectUser)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        getUserbyId(user.sub).then((item) => setUserData(item.Item))
+        getUserbyId(user.sub).then((item) => {
+            setUserData(item.Item)
+            setLoading(false)
+        })
     }, [])
 
     return (
@@ -27,13 +31,23 @@ const UserProfile = () => {
                 <Link to={`/updateProfile`}><Button bg='#A27083' color='white'>Update</Button></Link>
                 </ButtonGroup>
             </Flex>
+            {loading ?
+            <Center w='100%' alignItems='left' ml="auto" mr="auto">
+                <Stack w='100' bg='white'>
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                  </Stack>
+            </Center>
+            :
             <Center w='100%' alignItems='left' ml="auto" mr="auto">
                 <HStack w='100%' gap={10} mt='3rem' bg='white'>
                     <VStack w='40%' alignContent='left'>
                         <HStack gap='10px' p='0.75em' alignContent='center'>
                             <Avatar
                                 display={{ base: "none", md: "block" }}
-                                name={'s'}
+                                name={userData.username}
                                 size='md'
                             />
                             <VStack spacing="4px" align='stretch'
@@ -46,30 +60,31 @@ const UserProfile = () => {
                     </VStack>
                     <VStack w='60%' gap={10} p='2rem'>
                         <HStack w='100%' alignItems='center'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'>Email</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'>Email</Text>
                             <Text borderRadius='5px' borderColor='gray.400'>{userData.useremail}</Text>
                         </HStack >
                         <HStack w='100%' alignItems='center'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'> Phone Number</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'> Phone Number</Text>
                             <Text borderRadius='5px' borderColor='gray.400'>{userData.phone_number}</Text>
                         </HStack >
                         <HStack w='100%' alignItems='center'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'> UserName</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'> UserName</Text>
                             <Text borderRadius='5px' borderColor='gray.400'>{userData.username}</Text>
                         </HStack >
                         <HStack w='100%' alignItems='center'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'>Gender</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'>Gender</Text>
 
                             <Text borderRadius='5px' borderColor='gray.400' >{userData.gender?.length == 0 ? 'N/A' : userData.gender}</Text>
 
                         </HStack >
                         <HStack w='100%' alignItems='left'>
-                            <Text as='b' textColor='#11142D' fontSize='15px' w='20%'>Description</Text>
+                            <Text as='b' textColor='#11142D' fontSize='15px' w='35%'>Description</Text>
                             <Text borderRadius='5px' borderColor='gray.400' h="100%" >{userData.description?.length == 0 ? 'N/A' : userData.description}</Text>
                         </HStack >
                     </VStack>
                 </HStack>
             </Center>
+}
         </Box>
     )
 }

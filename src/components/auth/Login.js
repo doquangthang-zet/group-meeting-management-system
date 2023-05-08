@@ -6,7 +6,7 @@ import '@aws-amplify/ui-react/styles.css';
 
 import { useNavigate, useLocation } from 'react-router';
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/slices/userSlice";
+import { setAuthenticationState, setUser } from "../../redux/slices/userSlice";
 import { I18n } from 'aws-amplify';
 
 export function Login() {
@@ -93,6 +93,7 @@ export function Login() {
   useEffect(() => {
     if (route === 'authenticated') {
       dispatch(setUser(user.attributes))
+      dispatch(setAuthenticationState(route))
       navigate(from, { replace: true });
     }
   }, [route, navigate, from]);

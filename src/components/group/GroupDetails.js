@@ -1,10 +1,11 @@
 import { Box, Button, Flex, HStack, Heading, Icon, Skeleton, StackDivider, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { GrUpdate } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/slices/userSlice";
 import { getGroupbyId, getAllGroupNUser, getAllUser } from "../../dynamoDB";
+import GroupNuserInfo from "./groupNuserInfo";
 
 
 const GroupDetails = () => {
@@ -105,6 +106,7 @@ const GroupDetails = () => {
                                     <Tr>
                                         <Th color='white' pl="2" pt="4" pb="4">Name</Th>
                                         <Th color='white' pl="2" pt="4" pb="4">Role</Th>
+                                        <Th color='white' pl="2" pt="4" pb="4">Action</Th>
                                     </Tr>
                                 </Thead>
                                 <Tbody>
@@ -119,6 +121,7 @@ const GroupDetails = () => {
                                                 }
                                             </Td>
                                             <Td pl="2" pt="4" pb="4">{group.role == "host" ? "Admin" : "Member"}</Td>
+                                            <Td><Button bg='#A27083' color='white'><Link to={"/memberInfo/" + group.userid}>User Info</Link></Button></Td>
                                         </Tr>
                                     ))}
                                 </Tbody>

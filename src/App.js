@@ -19,6 +19,7 @@ import GroupDetails from './components/group/GroupDetails';
 import GroupDetailsUpdate from './components/group/GroupDetailsUpdate';
 import UserProfile from './components/setting/UserProfile';
 import UpdateForm from './components/setting/UpdateForm';
+import GroupNuserInfo from './components/group/groupNuserInfo';
 function MyRoutes() {
   const { route } = useAuthenticator((context) => [
     context.route,
@@ -57,6 +58,7 @@ function MyRoutes() {
                 <Route path="/creategroup" element={<CreateGroup />} />
                 <Route path="/groupdetails/:groupid" element={<GroupDetails />}/>
                 <Route path="/groupdetails/update/:groupid" element={<GroupDetailsUpdate />}/>
+                <Route path="/memberInfo/:uid" element={<GroupNuserInfo />}/>
                 <Route path="/profile" element={<UserProfile />}/>
                 <Route path="/updateProfile" element={<UpdateForm />}/>
 

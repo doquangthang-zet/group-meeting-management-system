@@ -19,7 +19,20 @@ import { getUserbyId } from '../../dynamoDB';
 
 const Header = ({ menuBtnRef, onOpen }) => {
 	const { route } = useAuthenticator((context) => [context.route]);
-	const {user} = useSelector(selectUser)
+	const {user, isAuthenticated} = useSelector(selectUser)
+	const [userInfo, setUserInfo] = useState({})
+
+	console.log(userInfo.username)
+
+	const fetchUserInfo = (userid) => {
+		getUserbyId(userid).then((item) => setUserInfo(item.Item))
+	}
+
+	useEffect(() => {
+		if(isAuthenticated == 'authenticated'){
+			fetchUserInfo(user.sub)
+		}
+	},[isAuthenticated])
 	
 	return (
 		<Box
@@ -55,13 +68,13 @@ const Header = ({ menuBtnRef, onOpen }) => {
 				<HStack gap='2'>
 					<Avatar
 						display={{ base: "none", md: "block" }}
-						name={'s'}
+						name={userInfo ? userInfo.username : 's'}
 						size='md'
 					/>
 					<VStack spacing="2px" align='stretch'
 						display={{ base: "none", md: "block" }}
 					>
-						
+						{userInfo && <Text  fontSize="md" fontWeight="bold" textAlign="left">{userInfo.username}</Text> }
 						<Text fontSize="sm" textAlign="left">{user.email}</Text>
 					</VStack>
 				</HStack>

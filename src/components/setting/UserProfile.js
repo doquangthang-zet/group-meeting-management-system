@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { selectUser } from "../../redux/slices/userSlice"
 import { getUserbyId } from "../../dynamoDB"
-import { Avatar, Box, Button, ButtonGroup, Center, GridItem, HStack, Heading, Spacer, Text, Textarea, VStack } from "@chakra-ui/react"
+import { Avatar, Box, Button, ButtonGroup, Center, GridItem, HStack, Heading, Skeleton, Spacer, Stack, Text, Textarea, VStack } from "@chakra-ui/react"
 import { Flex, Grid } from "@aws-amplify/ui-react"
 import UpdateForm from "./UpdateForm"
 import { Link } from "react-router-dom"
@@ -11,9 +11,13 @@ const UserProfile = () => {
     const [userData, setUserData] = useState({})
     console.log(userData)
     const { user } = useSelector(selectUser)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        getUserbyId(user.sub).then((item) => setUserData(item.Item))
+        getUserbyId(user.sub).then((item) => {
+            setUserData(item.Item)
+            setLoading(false)
+        })
     }, [])
 
     return (
@@ -27,13 +31,23 @@ const UserProfile = () => {
                 <Link to={`/updateProfile`}><Button bg='#A27083' color='white'>Update</Button></Link>
                 </ButtonGroup>
             </Flex>
+            {loading ?
+            <Center w='100%' alignItems='left' ml="auto" mr="auto">
+                <Stack w='100' bg='white'>
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                    <Skeleton isLoaded={!loading} height='20px' w='100' />
+                  </Stack>
+            </Center>
+            :
             <Center w='100%' alignItems='left' ml="auto" mr="auto">
                 <HStack w='100%' gap={10} mt='3rem' bg='white'>
                     <VStack w='40%' alignContent='left'>
                         <HStack gap='10px' p='0.75em' alignContent='center'>
                             <Avatar
                                 display={{ base: "none", md: "block" }}
-                                name={'s'}
+                                name={userData.username}
                                 size='md'
                             />
                             <VStack spacing="4px" align='stretch'
@@ -70,6 +84,7 @@ const UserProfile = () => {
                     </VStack>
                 </HStack>
             </Center>
+}
         </Box>
     )
 }

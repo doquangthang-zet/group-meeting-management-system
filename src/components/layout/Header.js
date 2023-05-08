@@ -32,7 +32,7 @@ const Header = ({ menuBtnRef, onOpen }) => {
 		if(isAuthenticated == 'authenticated'){
 			fetchUserInfo(user.sub)
 		}
-	},[isAuthenticated])
+	},[user.sub])
 	
 	return (
 		<Box

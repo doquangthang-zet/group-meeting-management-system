@@ -213,14 +213,14 @@ const Notifications = () => {
                 requestData.length === 0 ? <Flex w='100' mt='10'><Text>There is no notifications now</Text></Flex>
                     : requestData.map((item, index) => (
                         !selectedIndex.includes(index) ?
-                            <Card key={index} m="2em" borderRadius='md' size="sm" boxShadow='md' p='6' rounded='sm' >
+                            <Card key={index} m="2em" borderRadius='md' size="sm" boxShadow='md' px='6' py='3' rounded='sm' >
                                 <CardHeader>
-                                    <Heading size="md" ml="0.5em">{item.groupname}</Heading>
+                                    <Heading size="sm" ml="0.5em">{item.groupname}</Heading>
                                 </CardHeader>
                                 <CardBody mt="-0.25">
                                     <Text ml="0.5em">{item.senderName} wanted to join your group!
-                                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose size="2em" color="#E48181" />} onClick={() => handleChange({ status: STATUS_REJECTED, data: item, index: index })} />
-                                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right" size="2em" color="#306643" />} onClick={() => handleChange({ status: STATUS_ACCEPTED, data: item, index: index })} />
+                                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose size="lg" color="#E48181" />} onClick={() => handleChange({ status: STATUS_REJECTED, data: item, index: index })} />
+                                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right" size="lg" color="#306643" />} onClick={() => handleChange({ status: STATUS_ACCEPTED, data: item, index: index })} />
                                     </Text>
                                 </CardBody>
                             </Card>

@@ -15,7 +15,8 @@ const initialState = {
         id: "",
         name:"",
     },
-    userInfoUpdateStatus: USER_IDLE
+    userInfoUpdateStatus: USER_IDLE,
+    isAuthenticated: ""
 };
 
 
@@ -32,6 +33,10 @@ export const userSlice = createSlice({
         setUser:(state,action)=> {
             console.log("PAYLOAD",action.payload)
             state.user = action.payload
+        },
+        setAuthenticationState:(state,action) => {
+            console.log("PAYLOAD ROUTE", action.payload)
+            state.isAuthenticated = action.payload
         },
         changeUserUpdateStatus:(state, action) =>{
             state.userInfoUpdateStatus = action.payload
@@ -53,6 +58,6 @@ export const userSlice = createSlice({
 
 export const selectUser = (state) => state.user
 
-export const { setUser, changeUserUpdateStatus } = userSlice.actions
+export const { setUser, changeUserUpdateStatus, setAuthenticationState } = userSlice.actions
 
 export default userSlice.reducer

@@ -51,8 +51,8 @@ const GroupNuserInfo = () => {
                                 <Text fontSize="sm" textAlign="left">{userData.useremail}</Text>
                             </VStack>
                         </HStack>
-                        <Flex w='100%'>
-                            <Text borderRadius='5px' borderColor='gray.400' h="100%" w='100%' pl='2.25rem' pr='2.25rem' >{userData.description?.length == 0 ? 'User has not updated their description' : userData.description}</Text>
+                        <Flex w='100%' bg='yellow' justifyContent='center' alignItems='center'>
+                            <Text borderRadius='5px' borderColor='gray.400' h="100%" w='100%' pl='2.75rem'>{userData.description?.length == 0 ? 'This user has not updated their description yet' : userData.description}</Text>
                         </Flex>
                     </VStack>
                     <VStack w='60%' gap={10} p='2rem'>

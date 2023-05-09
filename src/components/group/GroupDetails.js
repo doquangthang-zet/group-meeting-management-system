@@ -104,24 +104,24 @@ const GroupDetails = () => {
                             <Table size="md">
                                 <Thead bg="#A27083">
                                     <Tr>
-                                        <Th color='white' pl="2" pt="4" pb="4">Name</Th>
-                                        <Th color='white' pl="2" pt="4" pb="4">Role</Th>
-                                        <Th color='white' pl="2" pt="4" pb="4">Action</Th>
+                                        <Th textAlign='center' color='white' pl="2" pt="4" pb="4">Name</Th>
+                                        <Th textAlign='center' color='white' pl="2" pt="4" pb="4">Role</Th>
+                                        <Th textAlign='center' color='white' pl="2" pt="4" pb="4">Action</Th>
                                     </Tr>
                                 </Thead>
                                 <Tbody>
                                     {groups && groups.Items?.filter((g) => 
                                         g.groupid == params.groupid
                                     ).map((group) => (
-                                        <Tr key={group.id}>
+                                        <Tr textAlign='center' key={group.id}>
                                             <Td pl="2" pt="4" pb="4">
                                                 {
                                                     users?.Items?.filter((user) => user.id == group.userid)
                                                     .map((u) => (u.username))
                                                 }
                                             </Td>
-                                            <Td pl="2" pt="4" pb="4">{group.role == "host" ? "Admin" : "Member"}</Td>
-                                            <Td><Button bg='#A27083' color='white'><Link to={"/memberInfo/" + group.userid}>User Info</Link></Button></Td>
+                                            <Td  textAlign='center' pl="2" pt="4" pb="4">{group.role == "host" ? "Admin" : "Member"}</Td>
+                                            <Td textAlign='center'><Link to={"/memberInfo/" + group.userid}><Button bg='#A27083' color='white'>User Info</Button></Link></Td>
                                         </Tr>
                                     ))}
                                 </Tbody>

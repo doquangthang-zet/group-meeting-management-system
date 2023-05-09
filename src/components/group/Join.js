@@ -45,6 +45,7 @@ const Join = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
   console.log(searchFilter)
+  console.log(grpData)
 
   const fetchGroupData = async () => {
     const response = await fetch(groupAPI)
@@ -159,8 +160,8 @@ const Join = () => {
                   <Td textAlign="center">{item.date}</Td>
                   <Td textAlign="center">{item.time}</Td>
                   <Td textAlign="center">{item.location}</Td>
-                  {!selectedIndex.includes(index) ?
-                    <Td textAlign="center"><Button variant='ghost' colorScheme="green" onClick={() => handleCreateRequest([item.id, item.host], index)} >Join</Button></Td>
+                  {!selectedIndex.includes(item.id) ?
+                    <Td textAlign="center"><Button variant='ghost' colorScheme="green" onClick={() => handleCreateRequest([item.id, item.host], item.id)} >Join</Button></Td>
                     :
                     <Td textAlign="center"><Icon w={6} h={6} color='green.500' as={MdCheckCircle} /></Td>
                   }

@@ -1,35 +1,29 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { selectUser } from "../../redux/slices/userSlice"
-import { getUserbyId } from "../../dynamoDB"
+import { getAllUser, getUserbyId } from "../../dynamoDB"
 import { Avatar, Box, Button, ButtonGroup, Center, GridItem, HStack, Heading, Skeleton, Spacer, Stack, Text, Textarea, VStack } from "@chakra-ui/react"
 import { Flex, Grid } from "@aws-amplify/ui-react"
-import UpdateForm from "./UpdateForm"
 import { Link } from "react-router-dom"
-
-const UserProfile = () => {
+import { useParams } from 'react-router-dom'
+const GroupNuserInfo = () => {
+    let params = useParams()
+    console.log(params.uid)
     const [userData, setUserData] = useState({})
     console.log(userData)
-    const { user } = useSelector(selectUser)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        getUserbyId(user.sub).then((item) => {
+        getUserbyId(params.uid).then((item) => {
             setUserData(item.Item)
             setLoading(false)
         })
-    }, [])
 
+    }, [])
     return (
         <Box w='93%' mt='1em' p='1em' alignItems='left' ml="auto" mr="auto">
-            <Flex w='100%' mt='1em' ml="auto" mr="auto" alignItems='center' gap='2' bg='red'>
+            <Flex w='100%' mt='1em' ml="auto" mr="auto" alignItems='center' gap='2' bg='red' justifyContent='center'>
                 <Box p='2'>
-                    <Heading color='#A27083' size='lg'>User Info</Heading>
+                    <Heading color='#A27083' size='lg'>User Information</Heading>
                 </Box>
-                <Spacer/>
-                <ButtonGroup gap='2'>
-                <Link to={`/updateProfile`}><Button bg='#A27083' color='white'>Update</Button></Link>
-                </ButtonGroup>
             </Flex>
             {loading ?
             <Center w='100%' alignItems='left' ml="auto" mr="auto">
@@ -57,8 +51,8 @@ const UserProfile = () => {
                                 <Text fontSize="sm" textAlign="left">{userData.useremail}</Text>
                             </VStack>
                         </HStack>
-                        <Flex w='100%'>
-                            <Text borderRadius='5px' borderColor='gray.400' h="100%" w='100%' pl='2.5rem' pr='2.5rem' >{userData.description?.length == 0 ? 'N/A' : userData.description}</Text>
+                        <Flex w='100%' bg='yellow' justifyContent='center' alignItems='center'>
+                            <Text borderRadius='5px' borderColor='gray.400' h="100%" w='100%' pl='2.75rem'>{userData.description?.length == 0 ? 'This user has not updated their description yet' : userData.description}</Text>
                         </Flex>
                     </VStack>
                     <VStack w='60%' gap={10} p='2rem'>
@@ -84,5 +78,8 @@ const UserProfile = () => {
 }
         </Box>
     )
+     
 }
-export default UserProfile;
+
+
+export default GroupNuserInfo;

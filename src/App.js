@@ -61,7 +61,6 @@ function MyRoutes() {
                 <Route path="/memberInfo/:uid" element={<GroupNuserInfo />}/>
                 <Route path="/profile" element={<UserProfile />}/>
                 <Route path="/updateProfile" element={<UpdateForm />}/>
-
               </Route>
             </Route>
           </Routes>

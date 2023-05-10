@@ -25,16 +25,6 @@ const GroupDetailsUpdate = () => {
     const toast = useToast()
     const dispatch = useDispatch();
 
-    
-    const formatDate = () => {
-        const splitted_date = date.split("-")
-        const joined_date = splitted_date[2] + "/" + splitted_date[1] + "/" + splitted_date[0]
-        return joined_date
-    }
-
-    const formated_date = formatDate();
-
-
     const fetchGroupData = async () => {
         const response = await fetch(groupAPI)
         try {
@@ -94,7 +84,7 @@ const GroupDetailsUpdate = () => {
         }
         try{
             setStatus(STATUS_CREATING)
-            dispatch(updateGroupAsync({groupID, formated_date, userID, location, time, groupName}))
+            dispatch(updateGroupAsync({groupID, date, userID, location, time, groupName}))
             setStatus(STATUS_IDLE)
             toast({
                 title: "Success",
@@ -112,6 +102,7 @@ const GroupDetailsUpdate = () => {
                 isClosable: true,
             })
         }
+        
     }
 
     useEffect(() => {

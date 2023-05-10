@@ -8,6 +8,8 @@ import { Navigate, redirect, useNavigate } from "react-router-dom";
 const UpdateForm = () => {
 	const { user, userInfoUpdateStatus } = useSelector(selectUser)
 	const [name, setName] = useState("")
+	const [avatarUrl, setAvatarUrl] = useState()
+	const [avatar, setAvatar] = useState()
 	console.log("Name", name)
 	console.log("STATUS", userInfoUpdateStatus)
 	const [gender, setGender] = useState("")
@@ -34,6 +36,12 @@ const UpdateForm = () => {
 		} catch (e) {
 			console.log(e)
 		}
+	}
+	console.log(avatar)
+	const handleFileUpload = (e) => {
+		setAvatar(e.target.files[0])
+		// setAvatarUrl("https://avatar-fileupload.s3.ap-southeast-1.amazonaws.com/" + avatar.name)
+		console.log(avatar)
 	}
 
 	useEffect(() => {
@@ -207,6 +215,27 @@ const UpdateForm = () => {
 									borderWidth="1px"
 									borderColor="#DBD7F4"
 								></Textarea>
+							</AccordionPanel>
+						</AccordionItem>
+						<AccordionItem>
+							<h2>
+								<AccordionButton _expanded={{ bg: "#A27083", color: "white" }}>
+									<Box as="span" flex='1' textAlign='left'>
+										Username
+									</Box>
+									<AccordionIcon />
+								</AccordionButton>
+							</h2>
+							<AccordionPanel>
+								<Text as="b">Profile Picture</Text>
+								<Input
+									// placeholder="New name"
+									// value={name}\
+									type="file"
+									onChange={e => handleFileUpload(e)}
+									borderWidth="1px"
+									borderColor="#DBD7F4"
+								></Input>
 							</AccordionPanel>
 						</AccordionItem>
 					</Accordion>

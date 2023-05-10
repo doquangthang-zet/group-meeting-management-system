@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { MdMenu } from "react-icons/md";
 
-import logo from "../../images/rmit_logo.svg"
+import logo from "../../images/image_25.svg"
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/slices/userSlice';
@@ -57,7 +57,7 @@ const Header = ({ menuBtnRef, onOpen }) => {
 
 				<HStack w='65%'>
 					<Link to="/">
-						<Image src={logo} alt="RMIT Logo" w={{ base: "70px", md: "100px" }} />
+						<Image src={logo} alt="Study Logo" w={{ base: "70px", md: "100px" }} />
 					</Link>
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, Text, CardHeader, Heading, IconButton, VStack, Box, Spinner, Center, useToast, Alert, Divider, Flex } from "@chakra-ui/react"
+import { Card, CardBody, Text, CardHeader, Heading, IconButton, VStack, Box, Spinner, Center, useToast, Alert, Divider, Flex, Button } from "@chakra-ui/react"
 import { BsCheck2 } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import { createGroupNUser, deleteRequest, getGroupbyId, getUserbyId, notifAPI, updateRequest } from '../../dynamoDB';
@@ -219,13 +219,13 @@ const Notifications = () => {
                                 </CardHeader>
                                 <CardBody mt="-0.25">
                                     <Text ml="0.5em">{item.senderName} wanted to join your group!
-                                        <IconButton float="right" mr="1em" mt="-1.25em" variant="ghost" icon={<IoMdClose size="lg" color="#E48181" />} onClick={() => handleChange({ status: STATUS_REJECTED, data: item, index: index })} />
-                                        <IconButton float={"right"} mt="-1.25em" variant="ghost" icon={<BsCheck2 float="right" size="lg" color="#306643" />} onClick={() => handleChange({ status: STATUS_ACCEPTED, data: item, index: index })} />
+                                        <Button colorScheme='green' float={"right"} mt="-1.25em" variant="ghost" onClick={() => handleChange({ status: STATUS_ACCEPTED, data: item, index: index })}>Accept</Button>
+                                        <Button colorScheme='red' float="right" mr="1em" mt="-1.25em" variant="ghost" onClick={() => handleChange({ status: STATUS_REJECTED, data: item, index: index })}>Reject</Button>   
                                     </Text>
                                 </CardBody>
                             </Card>
                             :
-                            <Card key={index} m="2em" borderRadius='2xl' size="md" boxShadow='md' p='6' rounded='sm' >
+                            <Card key={index} m="2em" borderRadius='md' size="sm" boxShadow='md' p='6' rounded='sm' >
                                 <CardHeader>
                                     <Heading size="sm" ml="0.5em">{item.senderName}</Heading>
                                 </CardHeader>
@@ -234,7 +234,6 @@ const Notifications = () => {
                                     </Text>
                                 </CardBody>
                             </Card>
-
                     ))
             }
         </Box>

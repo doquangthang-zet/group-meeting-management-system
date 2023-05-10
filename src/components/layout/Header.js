@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { MdMenu } from "react-icons/md";
 
-import logo from "../../images/image_25.svg"
+import logo from "../../images/image26.svg"
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/slices/userSlice';

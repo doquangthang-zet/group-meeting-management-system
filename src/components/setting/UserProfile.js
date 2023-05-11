@@ -58,7 +58,7 @@ const UserProfile = () => {
                             </VStack>
                         </HStack>
                         <Flex w='100%'>
-                            <Text borderRadius='5px' borderColor='gray.400' h="100%" w='100%' pl='2.5rem' pr='2.5rem' >{userData.description?.length == 0 ? 'N/A' : userData.description}</Text>
+                            <Text borderRadius='5px' borderColor='gray.400' h="100%" w='100%' pl='2.5rem' pr='2.5rem' >{userData.description?.length == 0 ? 'You have not updated your description' : userData.description}</Text>
                         </Flex>
                     </VStack>
                     <VStack w='60%' gap={10} p='2rem'>
@@ -76,7 +76,7 @@ const UserProfile = () => {
                         </HStack >
                         <HStack w='100%' alignItems='center'>
                             <Text as='b' textColor='#11142D' fontSize='15px' w='25%'>Gender</Text>
-                            <Text borderRadius='5px' borderColor='gray.400' >{userData.gender?.length == 0 ? 'N/A' : userData.gender}</Text>
+                            <Text borderRadius='5px' borderColor='gray.400' >{userData.gender?.length == 0 ? 'You have not updated your gender' : userData.gender}</Text>
                         </HStack >
                     </VStack>
                 </HStack>

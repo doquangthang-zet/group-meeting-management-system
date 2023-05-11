@@ -79,14 +79,7 @@ export const deleteGroupNUserAsync = createAsyncThunk('group/deleteGroupNUserAsy
 })
 
 export const updateGroupAsync = createAsyncThunk('groupDetails/updateGroupAsync', async(data) => {
-    const dataToJson = JSON.stringify({
-        id: data.groupID,
-        date: data.date,
-        groupname: data.groupName,
-        host: data.userID,
-        location: data.location,
-        time: data.time
-    })
+    const dataToJson = JSON.stringify(data)
     console.log(dataToJson)
     console.log(data.groupID)
     console.log(data.userID)

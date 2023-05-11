@@ -14,8 +14,10 @@ const GroupDetailsUpdate = () => {
     let params = useParams();
     const [status, setStatus] = useState(STATUS_IDLE)
     const [currentGroup, setCurrentGroup] = useState([]);
+    console.log("CUrrent", currentGroup)
     const [groupName, setGroupName] = useState("Hello");
     const [date, setDate] = useState("");
+    console.log("Date", date)
     const [time, setTime] = useState("");
     const [location, setLocation] = useState("");
     const { user } = useSelector(selectUser)
@@ -39,6 +41,11 @@ const GroupDetailsUpdate = () => {
         } catch (e) {
           console.log(e)
         }
+    }
+    const formatDate = (oldDate) => {
+        const splitted_date = oldDate.split("-")
+        const joined_date = splitted_date[2] + "/" + splitted_date[1] + "/" + splitted_date[0]
+        return joined_date
     }
 
     const handleUpdate = async() => {
@@ -84,7 +91,20 @@ const GroupDetailsUpdate = () => {
         }
         try{
             setStatus(STATUS_CREATING)
-            dispatch(updateGroupAsync({groupID, date, userID, location, time, groupName}))
+            const newUpdateInfo = {
+                id: groupID,
+                date: date,
+                groupname: groupName,
+                host: userID,
+                location: location,
+                time: time
+            }
+            if(currentGroup[0].date !== date){
+                const newDate = formatDate(date)
+                newUpdateInfo.date = newDate
+            }
+            console.log(newUpdateInfo)
+            dispatch(updateGroupAsync(newUpdateInfo))
             setStatus(STATUS_IDLE)
             toast({
                 title: "Success",

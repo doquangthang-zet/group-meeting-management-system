@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "230-2305982_profile-image-rmit-pixel.png",
+      "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "230-2305982_profile-image-rmit-pixel.png.png",
+      "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

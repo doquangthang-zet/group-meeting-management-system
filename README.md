@@ -1,70 +1,7 @@
-# Getting Started with Create React App
+- System Description
+We have noticed that after the pandemic occurred in 2020, people have been using online meeting services frequently as it is convenient and safer where they don’t talk to anyone directly. However, people get too attached to this benefit, which causes them to be extremely passive and even sometimes not paying attention to do something else. The consequences can be seen as the meeting hosts or presenters get cold audiences most of the time and it raises the frustration of not getting engaged with the audiences and the effectiveness of the meeting drops tragically. Therefore, we have decided to create this website to encourage our users to step out of their comfort, try something new with new people and create new memories, which hopefully can make our world less technologically but more frankly.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- What can it do ?
+In order to reach our goal, out team has come up with several functions to allow authenticated users (after they successfully sign up, verify their email and sign in to our system) to create groups and view their details as well as delete groups or update a group if they are group's host. Users can also view all of their groups as well as all of the groups that they have not joined. We also provide users search functions for them to search for a particular group. More importantly, our system allows user to join in a group that they want or they can leave a group if they think that group is not suitable for them. To join a group, users just need to click on the Join option, a request will be sent to the group's host and the group host can whether accept or reject the request. If the request is accepted user will be added to a group, otherwwise, the request will be deleted. Moreover, users can also view their personal information and edit as well. 
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- URL:  https://main.d1pbup927cj5ov.amplifyapp.com/ 
